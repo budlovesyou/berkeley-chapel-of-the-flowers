@@ -23,18 +23,23 @@ jobs:
 
       - name: Generate HTML from JSON
         run: |
-          echo '<div id="upcoming-events"></div><div id="previous-events"></div>' > events.html
+          echo '<h2>Upcoming Events</h2><div id="upcoming-events"></div>' > events.html
+          echo '<h2>Previous Events</h2><div id="previous-events"></div>' >> events.html
           
           jq -r '
           .records[] | 
-          "<div class=\"event_deets\"><h3>" + (.fields.event_name // "") + "</h3>
-          <p>" + (.fields.event_date // "") + "</p>
+          "<div class=\"event_deets\">
+          <h3>" + (.fields."Event Name" // "") + "</h3>
+          <p>" + (if .fields."Event Start Date" then (.fields."Event Start Date" | fromdate | strftime("%A %B %d %Y %I:%M %p")) else "" end) + " until " +
+          (if .fields."Event End Date" then (.fields."Event End Date" | fromdate | strftime("%I:%M %p")) else "" end) + "</p>
           <button class=\"toggle-btn\" onclick=\"toggleDescription(this)\">Show Details</button>
-          <div class=\"event_description\" style=\"display: none;\">
-          <p>" + (.fields.event_description // "") + "</p>
-          </div>
-          " + (if .fields.event_link then "<a href=\"" + .fields.event_link + "\">Event Link</a>" else "" end) + "
-          </div>"
+          " + (if .fields."Event Description" then "<div class=\"event_description\" style=\"display: none;\"><p>" + .fields."Event Description" + "</p></div>" else "" end) + "
+          " + 
+          (if .fields."Event URL" and .fields."Facebook URL" then "<a href=\"" + .fields."Event URL" + "\">Event Link</a> | <a href=\"" + .fields."Facebook URL" + "\">Facebook link</a>" 
+          else if .fields."Event URL" then "<a href=\"" + .fields."Event URL" + "\">Event Link</a>"
+          else if .fields."Facebook URL" then "<a href=\"" + .fields."Facebook URL" + "\">Facebook link</a>"
+          else "" end) + 
+          "</div>"
           ' events.json >> events.html
 
       - name: Commit and Push Changes
