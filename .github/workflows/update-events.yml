@@ -1,0 +1,46 @@
+name: Update Events Page
+
+on:
+  schedule:
+    - cron: '0 0 * * *'  # Runs daily at midnight UTC
+  workflow_dispatch:  # Allows manual triggering
+
+jobs:
+  update-events:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Install dependencies
+        run: sudo apt-get install jq
+
+      - name: Fetch Events from Airtable
+        run: |
+          curl -X GET "https://api.airtable.com/v0/YOUR_BASE_ID/event_deets" \
+          -H "Authorization: Bearer ${{ secrets.AIRTABLE_API_KEY }}" > events.json
+
+      - name: Generate HTML from JSON
+        run: |
+          echo '<div id="upcoming-events"></div><div id="previous-events"></div>' > events.html
+          
+          jq -r '
+          .records[] | 
+          "<div class=\"event_deets\"><h3>" + (.fields.event_name // "") + "</h3>
+          <p>" + (.fields.event_date // "") + "</p>
+          <button class=\"toggle-btn\" onclick=\"toggleDescription(this)\">Show Details</button>
+          <div class=\"event_description\" style=\"display: none;\">
+          <p>" + (.fields.event_description // "") + "</p>
+          </div>
+          " + (if .fields.event_link then "<a href=\"" + .fields.event_link + "\">Event Link</a>" else "" end) + "
+          </div>"
+          ' events.json >> events.html
+
+      - name: Commit and Push Changes
+        run: |
+          git config --global user.name "GitHub Actions"
+          git config --global user.email "actions@github.com"
+          git add events.html
+          git commit -m "Auto-update events page with latest Airtable data" || echo "No changes to commit"
+          git push
