@@ -19,7 +19,7 @@ jobs:
       - name: Fetch Events from Airtable
         run: |
           echo "📢 Fetching data from Airtable..."
-          curl -X GET "https://api.airtable.com/v0/appT25NC13v3OxP1O/Events" \
+          curl -X GET "https://api.airtable.com/v0/appT25NC13v3OxP1O/event_deets" \
           -H "Authorization: Bearer ${{ secrets.AIRTABLE_API_KEY }}" > events.json
 
       - name: Debug Airtable API Response
@@ -37,41 +37,99 @@ jobs:
             exit 1
           fi
 
-      - name: Generate HTML from JSON
+      - name: Update Events Sections in HTML
         run: |
-          echo '<h2>Upcoming Events</h2><div id="upcoming-events"></div>' > events.html
-          echo '<h2>Previous Events</h2><div id="previous-events"></div>' >> events.html
+          # Extract header (content before the first <h2>Upcoming Events</h2>)
+          awk '/<h2>Upcoming Events<\/h2>/{exit} {print}' events.html > header.html
           
+          # Extract footer (content after </div> of previous-events section)
+          tac events.html | awk '/<h2>Previous Events<\/h2>/{p=1; next} p' | tac > footer.html
+          
+          # Start the new updated events section
+          echo '<h2>Upcoming Events</h2><div id="upcoming-events">' > events-content.html
+          
+          # Generate upcoming events from JSON
           jq -r '
           if .records then
-            .records[] | 
-            "<div class=\"event_deets\">
-            <h3>" + (.fields."Event Name" // "Untitled Event") + "</h3>
-            <p>" + 
-              (if .fields."Event Start Date" then (.fields."Event Start Date" | fromdate? | strftime("%A %B %d %Y %I:%M %p")) else "TBD" end) + 
-              " until " +
-              (if .fields."Event End Date" then (.fields."Event End Date" | fromdate? | strftime("%I:%M %p")) else "TBD" end) + 
-            "</p>
-            <button class=\"toggle-btn\" onclick=\"toggleDescription(this)\">Show Details</button>" +
-            (if .fields."Event Description" then 
-              "<div class=\"event_description\" style=\"display: none;\"><p>" + .fields."Event Description" + "</p></div>" 
-            else 
-              "" 
-            end) + 
-            (if .fields."Event URL" and .fields."Facebook URL" then 
-              "<a href=\"" + .fields."Event URL" + "\">Event Link</a> | <a href=\"" + .fields."Facebook URL" + "\">Facebook link</a>" 
-            elif .fields."Event URL" then 
-              "<a href=\"" + .fields."Event URL" + "\">Event Link</a>" 
-            elif .fields."Facebook URL" then 
-              "<a href=\"" + .fields."Facebook URL" + "\">Facebook link</a>" 
-            else 
-              "" 
-            end) + 
-            "</div>"
+            .records[]
+            | select(.fields.status != "Preliminary")  # Filters out events with status = Preliminary
+            | select(.fields."Event Start Date" | fromdate? >= now)  # Upcoming events only
+            | "<div class=\"event_deets\">
+              <h3>" + (.fields."Event Name" // "Untitled Event") + "</h3>
+              <p>" + 
+                (if .fields."Event Start Date" then (.fields."Event Start Date" | fromdate? | strftime("%A %B %d %Y %I:%M %p")) else "TBD" end) + 
+                " until " +
+                (if .fields."Event End Date" then (.fields."Event End Date" | fromdate? | strftime("%I:%M %p")) else "TBD" end) + 
+              "</p>
+              <button class=\"toggle-btn\" onclick=\"toggleDescription(this)\">Show Details</button>" +
+              (if .fields."Event Description" then 
+                "<div class=\"event_description\" style=\"display: none;\"><p>" + .fields."Event Description" + "</p></div>" 
+              else 
+                "" 
+              end) + 
+              (if .fields."Event URL" and .fields."Facebook URL" then 
+                "<a href=\"" + .fields."Event URL" + "\">Event Link</a> | <a href=\"" + .fields."Facebook URL" + "\">Facebook link</a>" 
+              elif .fields."Event URL" then 
+                "<a href=\"" + .fields."Event URL" + "\">Event Link</a>" 
+              elif .fields."Facebook URL" then 
+                "<a href=\"" + .fields."Facebook URL" + "\">Facebook link</a>" 
+              else 
+                "" 
+              end) + 
+              "</div>"
           else
             "Error: No records found."
           end
-          ' events.json >> events.html
+          ' events.json >> events-content.html
+
+          # Close upcoming events section
+          echo '</div>' >> events-content.html
+          
+          # Start previous events section
+          echo '<h2>Previous Events</h2><div id="previous-events">' >> events-content.html
+          
+          # Generate previous events from JSON (older events)
+          jq -r '
+          if .records then
+            .records[]
+            | select(.fields.status != "Preliminary")  # Filters out Preliminary events
+            | select(.fields."Event Start Date" | fromdate? < now)  # Ensures event is in the past
+            | "<div class=\"event_deets\">
+              <h3>" + (.fields."Event Name" // "Untitled Event") + "</h3>
+              <p>" + 
+                (if .fields."Event Start Date" then (.fields."Event Start Date" | fromdate? | strftime("%A %B %d %Y %I:%M %p")) else "TBD" end) + 
+                " until " +
+                (if .fields."Event End Date" then (.fields."Event End Date" | fromdate? | strftime("%I:%M %p")) else "TBD" end) + 
+              "</p>
+              <button class=\"toggle-btn\" onclick=\"toggleDescription(this)\">Show Details</button>" +
+              (if .fields."Event Description" then 
+                "<div class=\"event_description\" style=\"display: none;\"><p>" + .fields."Event Description" + "</p></div>" 
+              else 
+                "" 
+              end) + 
+              (if .fields."Event URL" and .fields."Facebook URL" then 
+                "<a href=\"" + .fields."Event URL" + "\">Event Link</a> | <a href=\"" + .fields."Facebook URL" + "\">Facebook link</a>" 
+              elif .fields."Event URL" then 
+                "<a href=\"" + .fields."Event URL" + "\">Event Link</a>" 
+              elif .fields."Facebook URL" then 
+                "<a href=\"" + .fields."Facebook URL" + "\">Facebook link</a>" 
+              else 
+                "" 
+              end) + 
+              "</div>"
+          else
+            "Error: No records found."
+          end
+          ' events.json >> events-content.html
+
+          # Close previous events section
+          echo '</div>' >> events-content.html
+
+          # Combine header, updated events content, and footer into final events.html
+          cat header.html events-content.html footer.html > events.html
+
+          # Cleanup temporary files
+          rm header.html footer.html events-content.html
 
       - name: Commit and Push Changes
         env:
