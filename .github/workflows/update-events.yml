@@ -47,15 +47,26 @@ jobs:
             .records[] | 
             "<div class=\"event_deets\">
             <h3>" + (.fields."Event Name" // "Untitled Event") + "</h3>
-            <p>" + (if .fields."Event Start Date" then (.fields."Event Start Date" | fromdate? | strftime("%A %B %d %Y %I:%M %p")) else "TBD" end) + " until " +
-            (if .fields."Event End Date" then (.fields."Event End Date" | fromdate? | strftime("%I:%M %p")) else "TBD" end) + "</p>
-            <button class=\"toggle-btn\" onclick=\"toggleDescription(this)\">Show Details</button>
-            " + (if .fields."Event Description" then "<div class=\"event_description\" style=\"display: none;\"><p>" + .fields."Event Description" + "</p></div>" else "" end) + "
-            " + 
-            (if .fields."Event URL" and .fields."Facebook URL" then "<a href=\"" + .fields."Event URL" + "\">Event Link</a> | <a href=\"" + .fields."Facebook URL" + "\">Facebook link</a>" 
-            else if .fields."Event URL" then "<a href=\"" + .fields."Event URL" + "\">Event Link</a>"
-            else if .fields."Facebook URL" then "<a href=\"" + .fields."Facebook URL" + "\">Facebook link</a>"
-            else "" end) + 
+            <p>" + 
+              (if .fields."Event Start Date" then (.fields."Event Start Date" | fromdate? | strftime("%A %B %d %Y %I:%M %p")) else "TBD" end) + 
+              " until " +
+              (if .fields."Event End Date" then (.fields."Event End Date" | fromdate? | strftime("%I:%M %p")) else "TBD" end) + 
+            "</p>
+            <button class=\"toggle-btn\" onclick=\"toggleDescription(this)\">Show Details</button>" +
+            (if .fields."Event Description" then 
+              "<div class=\"event_description\" style=\"display: none;\"><p>" + .fields."Event Description" + "</p></div>" 
+            else 
+              "" 
+            end) + 
+            (if .fields."Event URL" and .fields."Facebook URL" then 
+              "<a href=\"" + .fields."Event URL" + "\">Event Link</a> | <a href=\"" + .fields."Facebook URL" + "\">Facebook link</a>" 
+            elif .fields."Event URL" then 
+              "<a href=\"" + .fields."Event URL" + "\">Event Link</a>" 
+            elif .fields."Facebook URL" then 
+              "<a href=\"" + .fields."Facebook URL" + "\">Facebook link</a>" 
+            else 
+              "" 
+            end) + 
             "</div>"
           else
             "Error: No records found."
