@@ -18,11 +18,24 @@ jobs:
 
       - name: Fetch Events from Airtable
         run: |
+          echo "📢 Fetching data from Airtable..."
           curl -X GET "https://api.airtable.com/v0/appT25NC13v3OxP1O/event_deets" \
           -H "Authorization: Bearer ${{ secrets.AIRTABLE_API_KEY }}" > events.json
 
       - name: Debug Airtable API Response
-        run: cat events.json
+        run: |
+          echo "📢 Checking Airtable API response..."
+          cat events.json
+          echo "✅ API response printed above."
+
+      - name: Validate API Response
+        run: |
+          if jq -e '.records' events.json >/dev/null; then
+            echo "✅ API response contains records."
+          else
+            echo "❌ ERROR: API response does not contain valid records."
+            exit 1
+          fi
 
       - name: Generate HTML from JSON
         run: |
