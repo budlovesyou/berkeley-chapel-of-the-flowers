@@ -19,7 +19,7 @@ jobs:
       - name: Fetch Events from Airtable
         run: |
           echo "📢 Fetching data from Airtable..."
-          curl -X GET "https://api.airtable.com/v0/appT25NC13v3OxP1O/event_deets" \
+          curl -X GET "https://api.airtable.com/v0/appT25NC13v3OxP1O/Events" \
           -H "Authorization: Bearer ${{ secrets.AIRTABLE_API_KEY }}" > events.json
 
       - name: Debug Airtable API Response
