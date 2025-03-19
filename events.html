@@ -101,25 +101,115 @@
     </div>
     
     <div class="container">
+<h2>Upcoming Events</h2><div id="upcoming-events">
+</div>
+<h2>Previous Events</h2><div id="previous-events">
+</div>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Events at Chapel of the Flowers</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        body {
+            font-family: 'Merriweather', serif;
+            background-color: #fdf6e3;
+            color: #333;
+            margin: 0;
+            padding: 0;
+        }
+        .header {
+            background: url('header-image.jpg') no-repeat center center;
+            background-size: cover;
+            text-align: center;
+            color: white;
+            padding: 60px 20px;
+        }
+        .header h1 {
+            font-size: 36px;
+            margin: 0;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+        .container {
+            width: 80%;
+            margin: auto;
+            padding: 20px;
+        }
+        h2 {
+            text-align: center;
+            color: #6b4226;
+        }
+        .event_deets {
+            background: #fff;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        .event_deets h3 {
+            margin-top: 0;
+            color: #4a2d19;
+        }
+        .event_description {
+            display: none;
+            padding: 10px;
+            background: #f4e3d7;
+            margin-top: 10px;
+            border-radius: 5px;
+            border-left: 4px solid #6b4226;
+        }
+        .toggle-btn, .host-event-btn {
+            background: #6b4226;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            cursor: pointer;
+            margin-top: 10px;
+            border-radius: 4px;
+            font-size: 14px;
+        }
+        .toggle-btn:hover, .host-event-btn:hover {
+            background: #4a2d19;
+        }
+        .host-event-container {
+            text-align: center;
+            margin-top: 20px;
+        }
+        .footer {
+            text-align: center;
+            padding: 20px;
+            background: #6b4226;
+            color: white;
+            margin-top: 40px;
+        }
+        .footer a {
+            color: white;
+            text-decoration: underline;
+        }
+    </style>
+    <script>
+        function toggleDescription(event) {
+            let description = event.nextElementSibling;
+            if (description.style.display === "none" || description.style.display === "") {
+                description.style.display = "block";
+                event.textContent = "Hide Details";
+            } else {
+                description.style.display = "none";
+                event.textContent = "Show Details";
+            }
+        }
+    </script>
+</head>
+<body>
+    <div class="header">
+        <h1>Events at Chapel of the Flowers</h1>
+    </div>
+    
+    <div class="container">
         <h2>Upcoming Events</h2>
         <div id="upcoming-events">
             <!-- Content dynamically replaced by GitHub Action -->
         </div>
         
-        <h2>Previous Events</h2>
-        <div id="previous-events">
-            <!-- Content dynamically replaced by GitHub Action -->
-        </div>
-
-        <div class="host-event-container">
-            <a href="https://airtable.com/appT25NC13v3OxP1O/pagu7RYQBSrZjanry/form" target="_blank">
-                <button class="host-event-btn">Propose to Host an Event at the Chapel</button>
-            </a>
-        </div>
-    </div>
-    
-    <div class="footer">
-        <p><a href="index.html">Back to Chapel of the Flowers Homepage</a></p>
-    </div>
-</body>
-</html>
