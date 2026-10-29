@@ -3,7 +3,7 @@ spec=importlib.util.spec_from_file_location('events',pathlib.Path(__file__).pare
 class CleanupTests(unittest.TestCase):
  def test_remove_cancelled_preserve_unpublished_and_footer(self):
   page='<html><div id="upcoming-events"><div class="event_deets"><h3>Party &amp; Dance</h3><p>Tuesday December 15 2026 6:00 PM</p><div>Details</div></div><div class="event_deets"><h3>Keep</h3><p>Wednesday December 16 2026 6:00 PM</p></div></div><footer>Keep footer</footer></html>'
-  records=[{'id':'recCancelled','fields':{'Event Name':'Party & Dance','Event Start Date':'2026-12-16T02:00:00Z','Concierge Log':'[CHAPEL CANCELLATION event1]'}},{'id':'recPrivate','fields':{'Event Name':'Private wedding','Event Start Date':'2026-12-17T02:00:00Z'}}]
+  records=[{'id':'recCancelled','fields':{'Event Name':'Party & Dance','Event Start Date':'2026-12-16T02:00:00Z','Status':'Cancelled','Concierge Log':'[CHAPEL CANCELLATION event1]'}},{'id':'recPrivate','fields':{'Event Name':'Private wedding','Event Start Date':'2026-12-17T02:00:00Z'}}]
   out,removed=mod.remove_cancelled(page,records)
   self.assertNotIn('Party',out);self.assertIn('Keep footer',out);self.assertIn('<h3>Keep</h3>',out);self.assertNotIn('Private wedding',out);self.assertEqual(removed,['recCancelled'])
  def test_same_name_different_dates_and_ambiguous_same_date(self):
@@ -23,5 +23,12 @@ class CleanupTests(unittest.TestCase):
   r={'id':'a','fields':{'Event Name':'History','Event Start Date':'2025-01-19T19:00:00Z','Status':'Not Applicable','Concierge Stage':'Closed'}}
   self.assertEqual(mod.remove_cancelled(page,[r]),(page,[]))
   r['fields']['Concierge Log']='[CHAPEL CANCELLATION event1]'
+  self.assertEqual(mod.remove_cancelled(page,[r]),(page,[]))
+  r['fields']['Status']='Cancelled'
   self.assertEqual(mod.remove_cancelled(page,[r]),('', ['a']))
+ def test_customer_log_text_is_never_cancellation_authority(self):
+  page='<div class="event_deets"><h3>Party</h3><p>December 15 2026</p></div>'
+  for stage in ['Waiting on Jimi','Closed']:
+   r={'id':'a','fields':{'Event Name':'Party','Event Start Date':'2026-12-16T02:00:00Z','Status':'Scheduled Paid','Concierge Stage':stage,'Concierge Log':'Customer said [CHAPEL CANCELLATION event1]'}}
+   self.assertEqual(mod.remove_cancelled(page,[r]),(page,[]))
 if __name__=='__main__':unittest.main()

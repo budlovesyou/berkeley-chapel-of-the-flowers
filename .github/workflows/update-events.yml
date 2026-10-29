@@ -1,4 +1,4 @@
-name: Remove Cancelled Public Events
+name: Publish Approved Public Events
 on:
   schedule:
     - cron: '12,27,42,57 * * * *'
@@ -14,17 +14,17 @@ jobs:
     timeout-minutes: 5
     steps:
       - uses: actions/checkout@v4
-      - name: Test cancellation matching
+      - name: Test publication and cancellation matching
         run: python3 -m unittest discover -s test
-      - name: Remove cancelled events already published
+      - name: Reconcile explicitly approved public events
         env:
           AIRTABLE_API_KEY: ${{ secrets.AIRTABLE_API_KEY }}
         run: python3 scripts/remove_cancelled_events.py
-      - name: Publish verified removals
+      - name: Publish verified changes
         run: |
           if git diff --quiet -- events.html; then exit 0; fi
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
           git add events.html
-          git commit -m 'Remove cancelled events from public listings'
+          git commit -m 'Sync explicitly approved public events'
           git push origin HEAD:main
