@@ -18,4 +18,10 @@ class CleanupTests(unittest.TestCase):
   r={'id':'a','fields':{'Event Name':'History','Event Start Date':'2026-12-16T02:00:00Z','Concierge Stage':'Closed'}}
   self.assertEqual(mod.remove_cancelled(page,[r])[0],page)
   with self.assertRaises(ValueError):mod.remove_cancelled(page[:-6],[r])
+ def test_not_applicable_preserves_history_without_explicit_cancellation(self):
+  page='<div class="event_deets"><h3>History</h3><p>January 19 2025</p></div>'
+  r={'id':'a','fields':{'Event Name':'History','Event Start Date':'2025-01-19T19:00:00Z','Status':'Not Applicable','Concierge Stage':'Closed'}}
+  self.assertEqual(mod.remove_cancelled(page,[r]),(page,[]))
+  r['fields']['Concierge Log']='[CHAPEL CANCELLATION event1]'
+  self.assertEqual(mod.remove_cancelled(page,[r]),('', ['a']))
 if __name__=='__main__':unittest.main()

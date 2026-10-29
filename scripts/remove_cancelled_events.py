@@ -7,7 +7,7 @@ import json, os, re, urllib.parse, urllib.request
 
 def normalize(text): return ' '.join(text.casefold().split())
 def cancelled(fields):
-    return any(normalize(str(fields.get(k,''))) in ('cancelled','canceled','not applicable') for k in ('Status','status')) or '[CHAPEL CANCELLATION ' in fields.get('Concierge Log','')
+    return any(normalize(str(fields.get(k,''))) in ('cancelled','canceled') for k in ('Status','status')) or '[CHAPEL CANCELLATION ' in fields.get('Concierge Log','')
 
 class EventBlocks(HTMLParser):
     def __init__(self, text):
