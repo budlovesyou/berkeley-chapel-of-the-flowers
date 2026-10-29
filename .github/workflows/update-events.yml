@@ -1,113 +1,30 @@
-name: Update Events Page
-
+name: Remove Cancelled Public Events
 on:
   schedule:
-    - cron: '0 0 * * *'  # Runs daily at midnight UTC
-  workflow_dispatch:  # Allows manual triggering
-
+    - cron: '12,27,42,57 * * * *'
+  workflow_dispatch:
+permissions:
+  contents: write
+concurrency:
+  group: public-event-cleanup
+  cancel-in-progress: false
 jobs:
-  update-events:
+  cleanup:
     runs-on: ubuntu-latest
-
+    timeout-minutes: 5
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v3
-
-      - name: Fetch Events from Airtable
-        run: |
-          echo "📢 Fetching data from Airtable..."
-          curl -X GET "https://api.airtable.com/v0/appT25NC13v3OxP1O/Events" \
-          -H "Authorization: Bearer ${{ secrets.AIRTABLE_API_KEY }}" > events.json
-
-      - name: Validate API Response
-        run: |
-          if jq -e '.records' events.json >/dev/null; then
-            echo "✅ API response contains records."
-          else
-            echo "❌ ERROR: API response does not contain valid records."
-            exit 1
-          fi
-
-      - name: Generate Events HTML
-        run: |
-          # Extract the event sections while keeping other parts of events.html unchanged
-          awk '/<div id="upcoming-events">/{exit} {print}' events.html > header.html
-          awk '/<h2>Previous Events<\/h2>/{exit} {print}' events.html | sed -n '/<div id="previous-events">/,$p' > footer.html
-
-          # Start upcoming events
-          echo '<h2>Upcoming Events</h2><div id="upcoming-events">' > events-content.html
-
-          # Parse upcoming events from JSON
-          jq -r '
-          .records[] 
-          | select(.fields.status != "Preliminary")  
-          | select(.fields."Event Start Date" | fromdate? >= now)  
-          | "<div class=\"event_deets\">
-              <h3>" + (.fields."Event Name" // "Untitled Event") + "</h3>
-              <p>" + 
-                (if .fields."Event Start Date" then (.fields."Event Start Date" | fromdate? | strftime("%A, %B %d, %Y %I:%M %p")) else "TBD" end) + 
-                " until " +
-                (if .fields."Event End Date" then (.fields."Event End Date" | fromdate? | strftime("%I:%M %p")) else "TBD" end) + 
-              "</p>
-              <button class=\"toggle-btn\" onclick=\"toggleDescription(this)\">Show Details</button>" +
-              (if .fields."Event Description" then 
-                "<div class=\"event_description\" style=\"display: none;\"><p>" + .fields."Event Description" + "</p></div>" 
-              else 
-                "" 
-              end) + 
-              (if .fields."Event URL" then 
-                "<br><a href=\"" + .fields."Event URL" + "\">More Details</a>" 
-              else 
-                "" 
-              end) + 
-              "</div>"
-          ' events.json >> events-content.html
-
-          echo '</div>' >> events-content.html  # Close upcoming events section
-
-          # Start previous events section
-          echo '<h2>Previous Events</h2><div id="previous-events">' >> events-content.html
-
-          # Parse previous events
-          jq -r '
-          .records[] 
-          | select(.fields.status != "Preliminary")  
-          | select(.fields."Event Start Date" | fromdate? < now)  
-          | "<div class=\"event_deets\">
-              <h3>" + (.fields."Event Name" // "Untitled Event") + "</h3>
-              <p>" + 
-                (if .fields."Event Start Date" then (.fields."Event Start Date" | fromdate? | strftime("%A, %B %d, %Y %I:%M %p")) else "TBD" end) + 
-                " until " +
-                (if .fields."Event End Date" then (.fields."Event End Date" | fromdate? | strftime("%I:%M %p")) else "TBD" end) + 
-              "</p>
-              <button class=\"toggle-btn\" onclick=\"toggleDescription(this)\">Show Details</button>" +
-              (if .fields."Event Description" then 
-                "<div class=\"event_description\" style=\"display: none;\"><p>" + .fields."Event Description" + "</p></div>" 
-              else 
-                "" 
-              end) + 
-              (if .fields."Event URL" then 
-                "<br><a href=\"" + .fields."Event URL" + "\">More Details</a>" 
-              else 
-                "" 
-              end) + 
-              "</div>"
-          ' events.json >> events-content.html
-
-          echo '</div>' >> events-content.html  # Close previous events section
-
-          # Merge sections into final events.html
-          cat header.html events-content.html footer.html > events.html
-
-          # Cleanup temp files
-          rm header.html footer.html events-content.html
-
-      - name: Commit and Push Changes
+      - uses: actions/checkout@v4
+      - name: Test cancellation matching
+        run: python3 -m unittest discover -s test
+      - name: Remove cancelled events already published
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          AIRTABLE_API_KEY: ${{ secrets.AIRTABLE_API_KEY }}
+        run: python3 scripts/remove_cancelled_events.py
+      - name: Publish verified removals
         run: |
-          git config --global user.name "github-actions[bot]"
-          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          if git diff --quiet -- events.html; then exit 0; fi
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
           git add events.html
-          git commit -m "Auto-update events page with latest Airtable data" || exit 0
-          git push origin main
+          git commit -m 'Remove cancelled events from public listings'
+          git push origin HEAD:main

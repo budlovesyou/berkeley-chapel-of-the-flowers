@@ -1,0 +1,24 @@
+name: Chapel Concierge Health
+on:
+  schedule:
+    - cron: '7,22,37,52 * * * *'
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: chapel-health
+  cancel-in-progress: false
+jobs:
+  health:
+    runs-on: ubuntu-latest
+    timeout-minutes: 3
+    steps:
+      - name: Check host, worker progress and billing monitor
+        run: |
+          curl --fail --silent --show-error --max-time 25 --retry 2 --retry-delay 10 --retry-all-errors \
+            https://notify.bud.com/webhooks/chapel/sms -o health.json
+          python3 - <<'PY'
+          import json
+          with open('health.json') as response:
+              assert json.load(response) == {'healthy': True}, 'Chapel service is unhealthy'
+          PY
