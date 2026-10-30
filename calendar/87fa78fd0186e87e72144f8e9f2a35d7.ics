@@ -1,0 +1,19 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Chapel of the Flowers//Public Events//EN
+BEGIN:VEVENT
+SUMMARY:GRAND OPENING CLUB DUB BERKELEY!
+DTSTART:20260830T000000Z
+DTEND:20260830T070000Z
+DTSTAMP:20261030T165754Z
+UID:87fa78fd0186e87e72144f8e9f2a35d7@chapeloftheflowers.love
+CLASS:PUBLIC
+DESCRIPTION:Club Dub Berkeley's grand opening with music\, DJs\, and live 
+ performances.\n\nArchived event.\nOriginal Eventbrite listing: https://www
+ .eventbrite.com/e/grand-opening-club-dub-berkeley-tickets-1996358789881
+LOCATION:Berkeley Chapel of the Flowers\, 3049 Adeline Street\, Berkeley\,
+  CA 94703
+URL:https://www.eventbrite.com/e/grand-opening-club-dub-berkeley-tickets-1
+ 996358789881
+END:VEVENT
+END:VCALENDAR

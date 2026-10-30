@@ -1,0 +1,19 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Chapel of the Flowers//Public Events//EN
+BEGIN:VEVENT
+SUMMARY:Robot Koch (live) - Vibro-acoustic Journey
+DTSTART:20260322T030000Z
+DTEND:20260322T043000Z
+DTSTAMP:20261030T165754Z
+UID:99f4046cd4a77be7cd14488b9099930b@chapeloftheflowers.love
+CLASS:PUBLIC
+DESCRIPTION:An immersive live performance by Robot Koch at the Chapel.\n\n
+ Archived event.\nOriginal Eventbrite listing: https://www.eventbrite.com/e
+ /robot-koch-live-vibro-acoustic-journey-tickets-1982796999200
+LOCATION:Berkeley Chapel of the Flowers\, 3049 Adeline Street\, Berkeley\,
+  CA 94703
+URL:https://www.eventbrite.com/e/robot-koch-live-vibro-acoustic-journey-ti
+ ckets-1982796999200
+END:VEVENT
+END:VCALENDAR

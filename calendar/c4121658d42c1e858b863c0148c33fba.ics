@@ -1,0 +1,19 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Chapel of the Flowers//Public Events//EN
+BEGIN:VEVENT
+SUMMARY:Etana Birthday Celebration
+DTSTART:20260524T010000Z
+DTEND:20260524T050000Z
+DTSTAMP:20261030T165754Z
+UID:c4121658d42c1e858b863c0148c33fba@chapeloftheflowers.love
+CLASS:PUBLIC
+DESCRIPTION:Etana's birthday and album-release celebration with live music
+  and community.\n\nArchived event.\nOriginal Eventbrite listing: https://w
+ ww.eventbrite.com/e/etana-birthday-celebration-tickets-1987080782110
+LOCATION:Berkeley Chapel of the Flowers\, 3049 Adeline Street\, Berkeley\,
+  CA 94703
+URL:https://www.eventbrite.com/e/etana-birthday-celebration-tickets-198708
+ 0782110
+END:VEVENT
+END:VCALENDAR

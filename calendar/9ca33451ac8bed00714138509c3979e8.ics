@@ -1,0 +1,19 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Chapel of the Flowers//Public Events//EN
+BEGIN:VEVENT
+SUMMARY:Sonic Serenity: An Immersive Sound Meditation
+DTSTART:20251208T030000Z
+DTEND:20251208T050000Z
+DTSTAMP:20261030T165754Z
+UID:9ca33451ac8bed00714138509c3979e8@chapeloftheflowers.love
+CLASS:PUBLIC
+DESCRIPTION:An immersive sound meditation at the Chapel.\n\nArchived event
+ .\nOriginal Eventbrite listing: https://www.eventbrite.com/e/sonic-serenit
+ y-an-immersive-sound-meditation-tickets-1972840283395
+LOCATION:Berkeley Chapel of the Flowers\, 3049 Adeline Street\, Berkeley\,
+  CA 94703
+URL:https://www.eventbrite.com/e/sonic-serenity-an-immersive-sound-meditat
+ ion-tickets-1972840283395
+END:VEVENT
+END:VCALENDAR

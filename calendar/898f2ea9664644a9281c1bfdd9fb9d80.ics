@@ -1,0 +1,21 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Chapel of the Flowers//Public Events//EN
+BEGIN:VEVENT
+SUMMARY:SO Reel Film Fest / After Party Featuring Rock Box
+DTSTART:20260620T170000Z
+DTEND:20260620T190000Z
+DTSTAMP:20261030T165754Z
+UID:898f2ea9664644a9281c1bfdd9fb9d80@chapeloftheflowers.love
+CLASS:PUBLIC
+DESCRIPTION:An indie film festival featuring local storytellers\, listed w
+ ith an after party featuring Rock Box. Archived hours follow the original 
+ Eventbrite listing.\n\nArchived event.\nOriginal Eventbrite listing: https
+ ://www.eventbrite.com/e/so-reel-film-fest-after-party-featuring-rock-box-t
+ ickets-1991719916887
+LOCATION:Berkeley Chapel of the Flowers\, 3049 Adeline Street\, Berkeley\,
+  CA 94703
+URL:https://www.eventbrite.com/e/so-reel-film-fest-after-party-featuring-r
+ ock-box-tickets-1991719916887
+END:VEVENT
+END:VCALENDAR

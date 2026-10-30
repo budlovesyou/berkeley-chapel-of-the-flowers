@@ -1,0 +1,19 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Chapel of the Flowers//Public Events//EN
+BEGIN:VEVENT
+SUMMARY:Sonic Serenity - An Immersive Sound Journey
+DTSTART:20251207T010000Z
+DTEND:20251207T040000Z
+DTSTAMP:20261030T165754Z
+UID:012faac3f2f5b91997338e19e959d8ae@chapeloftheflowers.love
+CLASS:PUBLIC
+DESCRIPTION:An immersive vibroacoustic sound journey at the Chapel.\n\nArc
+ hived event.\nOriginal Eventbrite listing: https://www.eventbrite.com/e/so
+ nic-serenity-an-immersive-sound-journey-tickets-1972840227227
+LOCATION:Berkeley Chapel of the Flowers\, 3049 Adeline Street\, Berkeley\,
+  CA 94703
+URL:https://www.eventbrite.com/e/sonic-serenity-an-immersive-sound-journey
+ -tickets-1972840227227
+END:VEVENT
+END:VCALENDAR

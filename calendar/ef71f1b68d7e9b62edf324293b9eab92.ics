@@ -1,0 +1,20 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Chapel of the Flowers//Public Events//EN
+BEGIN:VEVENT
+SUMMARY:WestCal Hemp & Cannabis Opportunities Event
+DTSTART:20260430T230000Z
+DTEND:20260501T010000Z
+DTSTAMP:20261030T165754Z
+UID:ef71f1b68d7e9b62edf324293b9eab92@chapeloftheflowers.love
+CLASS:PUBLIC
+DESCRIPTION:A free event connecting attendees with hemp and cannabis emplo
+ yers and apprenticeship opportunities.\n\nArchived event.\nOriginal Eventb
+ rite listing: https://www.eventbrite.com/e/westcal-hemp-cannabis-opportuni
+ ties-event-tickets-1988365037352
+LOCATION:Berkeley Chapel of the Flowers\, 3049 Adeline Street\, Berkeley\,
+  CA 94703
+URL:https://www.eventbrite.com/e/westcal-hemp-cannabis-opportunities-event
+ -tickets-1988365037352
+END:VEVENT
+END:VCALENDAR
