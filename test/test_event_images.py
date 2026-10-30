@@ -206,4 +206,94 @@ class FetchAndFailureTests(unittest.TestCase):
             self.assertIn('Public Concert',(root/'events.html').read_text())
             self.assertEqual(len(list((root/'calendar').glob('*.ics'))),1)
 
-if __name__=='__main__':unittest.main()
+
+class AdditionalSourceTests(unittest.TestCase):
+    def test_new_platforms_use_verified_event_metadata_and_larger_fallback(self):
+        cases = [
+            ('https://cannabooks.splashthat.com/', 'https://d24wuq6o951i2g.cloudfront.net/img/events/splash/cards/459186420.png'),
+            ('https://www.shefaflow.org/programs/p/song-circle', 'https://images.squarespace-cdn.com/content/v1/site/song.jpg'),
+            ('https://sf.funcheap.com/public-concert/', 'https://cdn.funcheap.com/wp-content/uploads/2026/11/concert.jpg'),
+        ]
+        for url, art in cases:
+            with self.subTest(url=url):
+                html = page(image=art).replace(PAGE,url)
+                self.assertEqual(images.candidates(html,url,event(links=[url])),[art])
+                self.assertEqual(images.candidates(html,url,event(start=NOW)),[])
+        html=page(image=ART)+'<meta property="og:image" content="https://cdn.evbuc.com/images/large.jpg">'
+        self.assertEqual(images.candidates(html,PAGE,event()),[ART,'https://cdn.evbuc.com/images/large.jpg'])
+
+    def test_new_source_allowlists_reject_spoofed_hosts_and_private_api_routes(self):
+        for url,kind in [
+            ('https://evil.splashthat.com.attacker.test/','page'),
+            ('https://splashthat.com/login','page'),
+            ('https://api.eventhi.io/api/admin/events/13584','api'),
+            ('https://api.eventhi.io/api/upcoming-events/name-slug/show-13584?redirect=http://localhost','api'),
+            ('https://arbitrary.cloudfront.net/poster.jpg','image'),
+            ('https://www.shefaflow.org/account','page'),
+        ]:
+            with self.subTest(url=url): self.assertFalse(images.allowed_url(url,kind))
+
+    def eventhi_payload(self, **changes):
+        record={'id':13584,'name':'Dime Bag Comedy Show ', 'nameSlug':'dime-bag-comedy-show-13584',
+                'private':False,'status':'Published','canceledAt':None,
+                'startsAt':'2026-02-14T03:00:01.000Z','endsAt':'2026-02-14T06:00:01.000Z',
+                'imageUrl':'13584/images/1768530475686'}
+        record.update(changes)
+        return json.dumps({'eventDetails':record}).encode()
+
+    def test_eventhi_live_shape_persists_correct_local_date_image(self):
+        url='https://eventhi.io/events/dime-bag-comedy-show-13584'
+        api='https://api.eventhi.io/api/upcoming-events/name-slug/dime-bag-comedy-show-13584'
+        art='https://d20jvj0ju92u0f.cloudfront.net/13584/images/1768530475686'
+        e=event(title='Dime Bag Cannabis Comedy',links=[url],start='2026-02-13 19:00:00-08:00',end='2026-02-13 22:00:00-08:00')
+        def reader(u,k):
+            if (u,k)==(api,'api'):return self.eventhi_payload(),u
+            if (u,k)==(art,'image'):return png(),u
+            raise AssertionError((u,k))
+        with TemporaryDirectory() as tmp:
+            root=Path(tmp)
+            images.discover([e],root,NOW,reader)
+            selected=images.load_images([e],root).get(images.image_key(e))
+            self.assertIsNotNone(selected)
+            self.assertEqual(selected['source_url'],url)
+            self.assertEqual(selected['original_url'],art)
+            self.assertTrue((root/selected['src']).is_file())
+
+    def test_eventhi_rejects_unrelated_private_cancelled_or_wrong_date_records(self):
+        url='https://eventhi.io/events/dime-bag-comedy-show-13584'
+        e=event(title='Dime Bag Cannabis Comedy',links=[url],start='2026-02-13 19:00:00-08:00',end='2026-02-13 22:00:00-08:00')
+        for changes in [dict(private=True),dict(status='Draft'),dict(canceledAt='2026-02-01'),
+                        dict(id=99),dict(nameSlug='other-99'),dict(name='Unrelated Comedy Show'),
+                        dict(startsAt='2026-03-14T03:00:00Z'),dict(imageUrl='EventHiDefault.jpeg')]:
+            with self.subTest(changes=changes),TemporaryDirectory() as tmp:
+                root=Path(tmp)
+                def reader(u,k):
+                    if k=='api':return self.eventhi_payload(**changes),u
+                    return png(),u
+                images.discover([e],root,NOW,reader)
+                self.assertFalse(images.load_images([e],root))
+
+class SplashArtworkTests(unittest.TestCase):
+    def test_splash_uses_matching_event_asset_instead_of_template_share_card(self):
+        url='https://cannabooks.splashthat.com/'
+        art='https://d3m889aznlr23d.cloudfront.net/img/events/id/459/459186420/assets/b42bb8adb52e9993f2a684353f3b50a8.Cannabis-Author-Showcase.png'
+        html='<script type="application/ld+json">'+json.dumps({'@type':'Event','name':'Cannabis Author Showcase','startDate':'2025-05-28T17:00:00-04:00'})+'</script>'
+        html+='<meta property="og:image" content="https://d24wuq6o951i2g.cloudfront.net/img/events/splash/cards/459186420.x3.50aae5fb.png">'
+        e=event(title='Cannabis Author Showcase',start='2025-05-28T17:00:00-07:00',links=[url])
+        self.assertEqual(images.candidates(html,url,e),[])
+        self.assertEqual(images.candidates(html+'<img src="'+art+'">',url,e),[art])
+        self.assertEqual(images.candidates(html+'<img src="'+art.replace('/459186420/','/100/')+'">',url,e),[])
+
+    def test_small_jsonld_thumbnail_falls_back_to_decodable_large_artwork(self):
+        big='https://cdn.evbuc.com/images/large.jpg'
+        html=page(image=ART)+'<meta property="og:image" content="'+big+'">'
+        def reader(url,kind):
+            if kind=='page':return html.encode(),url
+            return png((80,80) if url==ART else (600,300)),url
+        with TemporaryDirectory() as tmp:
+            root=Path(tmp);e=event()
+            images.discover([e],root,NOW,reader)
+            self.assertEqual(images.load_images([e],root)[images.image_key(e)]['original_url'],big)
+
+if __name__ == '__main__':
+    unittest.main()

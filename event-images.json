@@ -819,6 +819,85 @@
       "source_url": "https://bppaln.org/holistic-health",
       "original_url": "https://images.squarespace-cdn.com/content/v1/608874eeb7410e0f0c4b0915/506955bd-3648-4e23-bd77-b256d81b4440/image000000+2.JPG?format=750w",
       "verified_on": "2026-10-30"
+    },
+    "chapelhist14004bc8f0c4bbb2378283d9929203e78fe2db358a719520@google.com": {
+      "src": "assets/event-images/4a513a73a6fde47a08c05afe.webp",
+      "width": 500,
+      "height": 500,
+      "alt": "Lior Tsarfaty, guide for the Shefa Prayer and Song Circle",
+      "source_url": "https://chochmat.org/team/lior-tsarfaty-4/",
+      "original_url": "https://chochmat.org/wp-content/uploads/2020/06/Tsarfati.webp",
+      "verified_on": "2026-10-30",
+      "selection_note": "Guide portrait; original dated event pages now return 404. Calendar descriptions name Lior Tsarfaty."
+    },
+    "chapelhist06b050226b474085bbb24bf658290e6613fde041d74d9bbb@google.com": {
+      "src": "assets/event-images/4a513a73a6fde47a08c05afe.webp",
+      "width": 500,
+      "height": 500,
+      "alt": "Lior Tsarfaty, guide for the Shefa Prayer and Song Circle",
+      "source_url": "https://chochmat.org/team/lior-tsarfaty-4/",
+      "original_url": "https://chochmat.org/wp-content/uploads/2020/06/Tsarfati.webp",
+      "verified_on": "2026-10-30",
+      "selection_note": "Guide portrait; original dated event pages now return 404. Calendar descriptions name Lior Tsarfaty."
+    },
+    "chapelhista93157e3e0c909f044e64799c1f2b27e8c75d53309f51897@google.com": {
+      "src": "assets/event-images/d86afb2a651debbdaccca7d9.webp",
+      "width": 675,
+      "height": 795,
+      "alt": "Hagit Cohen, guide for the Shefa Breathwork Ceremony",
+      "source_url": "https://www.hagitcohen.com/copy-of-about",
+      "original_url": "https://static.wixstatic.com/media/dcd4b4_624b6a9efba44370b7970a0692a6e1e7~mv2.jpg",
+      "verified_on": "2026-10-30",
+      "selection_note": "Guide portrait from her official biography; original event page now returns 404. Calendar description identifies Hagit Cohen."
+    },
+    "chapelhist9805a0e6a17ca5222094c4e5a1a0f220bce041aafc00177a@google.com": {
+      "src": "assets/event-images/214308a90fdc12830ea5883e.webp",
+      "width": 960,
+      "height": 1200,
+      "alt": "Musicians pictured at the Chapel in the original Fantasy Waltz Night listing",
+      "source_url": "https://sf.funcheap.com/fantasy-waltz-night-chapel-flowers/",
+      "original_url": "https://cdn.funcheap.com/wp-content/uploads/2025/04/waltz-night-2-3-scaled.jpg",
+      "verified_on": "2026-10-30",
+      "selection_note": "Promotional photo from the organizer-submitted listing for April 25, 2025; calendar postponed label retained. Not a photo claimed to document the postponed event."
+    },
+    "chapelhist387138f067cc7f0f3bff7de381498ef453ef631638e983f8@google.com": {
+      "src": "assets/event-images/76a6b2ead19ba40cee2cd76b.webp",
+      "width": 960,
+      "height": 1200,
+      "alt": "Book and botanical illustration from the Cannabis Author Showcase event page",
+      "source_url": "https://cannabooks.splashthat.com/",
+      "original_url": "https://d3m889aznlr23d.cloudfront.net/img/events/id/459/459186420/assets/b42bb8adb52e9993f2a684353f3b50a8.Cannabis-Author-Showcase.png",
+      "verified_on": "2026-10-30",
+      "selection_note": "Event-specific graphic verified on the May 28, 2025 Splash page; the generic Splash share card was rejected."
+    },
+    "chapelhistb164394f84f2c32a76422cf12e1065fe55f2fa299017e9da@google.com": {
+      "src": "assets/event-images/070fff5447f982dd5ce9ca25.webp",
+      "width": 302,
+      "height": 302,
+      "alt": "Richard Lee, cannabis activist and founder of Oaksterdam University",
+      "source_url": "https://oaksterdamuniversity.com/richard-lee/",
+      "original_url": "https://oaksterdam.com/wp-content/uploads/2016/03/Richard-Lee-e1777635190598.png",
+      "verified_on": "2026-10-30",
+      "selection_note": "Portrait from the official Oaksterdam tribute, matching the activist described by the calendar; not a memorial-event flyer."
+    }
+  },
+  "attempts": {
+    "occurrence:6740f4c94a182b3e4ef63dffec4412f5": {
+      "fingerprint": "670b31b9109002fe49499b0d8c1ef33a5ff1fd419bd80f9f8863acf581f36478",
+      "checked_at": "2026-10-30T11:23:10.854298-07:00",
+      "outcome": "added"
+    }
+  },
+  "occurrences": {
+    "occurrence:6740f4c94a182b3e4ef63dffec4412f5": {
+      "src": "assets/event-images/c0d00a708ff0c75be7ccb276.webp",
+      "width": 1200,
+      "height": 1009,
+      "alt": "Chapel of the Flowers exterior, featured on the Dime Bag Comedy event page",
+      "source_url": "https://eventhi.io/events/dime-bag-comedy-show-13584",
+      "original_url": "https://d20jvj0ju92u0f.cloudfront.net/13584/images/1768530475686",
+      "discovered_on": "2026-10-30",
+      "fingerprint": "670b31b9109002fe49499b0d8c1ef33a5ff1fd419bd80f9f8863acf581f36478"
     }
   }
 }

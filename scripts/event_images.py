@@ -14,9 +14,12 @@ import sys
 import warnings
 
 ZONE = ZoneInfo('America/Los_Angeles')
-PAGE_HOSTS = {'eventbrite.com', 'www.eventbrite.com', 'partiful.com', 'www.partiful.com', 'lu.ma', 'luma.com', 'www.luma.com'}
-IMAGE_HOSTS = {'img.evbuc.com', 'cdn.evbuc.com', 'partiful.imgix.net', 'images.lumacdn.com', 'cdn.lu.ma'}
-LIMITS = {'page': 2_000_000, 'image': 8_000_000}
+PAGE_HOSTS = {'eventbrite.com', 'www.eventbrite.com', 'partiful.com', 'www.partiful.com', 'lu.ma', 'luma.com', 'www.luma.com',
+              'eventhi.io', 'www.eventhi.io', 'shefaflow.org', 'www.shefaflow.org', 'sf.funcheap.com'}
+IMAGE_HOSTS = {'img.evbuc.com', 'cdn.evbuc.com', 'partiful.imgix.net', 'images.lumacdn.com', 'cdn.lu.ma',
+               'd20jvj0ju92u0f.cloudfront.net', 'd24wuq6o951i2g.cloudfront.net', 'd3m889aznlr23d.cloudfront.net',
+               'images.squarespace-cdn.com', 'static1.squarespace.com', 'cdn.funcheap.com'}
+LIMITS = {'page': 2_000_000, 'api': 2_000_000, 'image': 8_000_000}
 MAX_EVENTS = 5
 WORKER_SECONDS = 45
 
@@ -26,10 +29,21 @@ def allowed_url(url, kind):
         p = urlsplit(url)
         if p.scheme != 'https' or p.username or p.password or p.port not in (None, 443):
             return False
+        if kind == 'api':
+            return p.hostname == 'api.eventhi.io' and not p.query and not p.fragment and bool(
+                re.fullmatch(r'/api/upcoming-events/name-slug/[a-zA-Z0-9-]+-\d+', p.path))
         if kind == 'image':
             return p.hostname in IMAGE_HOSTS and not re.search(r'(?:avatar|default|logo)', p.path, re.I)
+        if kind != 'page':
+            return False
+        if re.fullmatch(r'[a-z0-9-]+\.splashthat\.com', p.hostname or ''):
+            return p.hostname not in {'www.splashthat.com', 'app.splashthat.com'} and p.path in ('', '/')
         if p.hostname not in PAGE_HOSTS:
             return False
+        if p.hostname in {'eventhi.io', 'www.eventhi.io'}:
+            return bool(re.fullmatch(r'/events/[a-zA-Z0-9-]+-\d+/?', p.path))
+        if p.hostname in {'shefaflow.org', 'www.shefaflow.org'}:
+            return bool(re.fullmatch(r'/(?:programs/p|events)/[a-zA-Z0-9-]+/?', p.path))
         if p.hostname in {'eventbrite.com', 'www.eventbrite.com'}:
             return bool(re.fullmatch(r'/e/[\w-]+-\d+/?', p.path))
         if 'partiful.com' in p.hostname:
@@ -64,6 +78,7 @@ class Metadata(HTMLParser):
     def __init__(self, html):
         super().__init__(convert_charrefs=True)
         self.meta = {}
+        self.images = []
         self.documents = []
         self.next_data = {}
         self.script = None
@@ -71,6 +86,8 @@ class Metadata(HTMLParser):
 
     def handle_starttag(self, tag, attrs):
         attrs = dict(attrs)
+        if tag == 'img' and attrs.get('src'):
+            self.images.append(attrs['src'])
         if tag == 'meta':
             self.meta.setdefault(attrs.get('property', attrs.get('name', '')), attrs.get('content', ''))
         if tag == 'script' and (attrs.get('type') == 'application/ld+json' or attrs.get('id') == '__NEXT_DATA__'):
@@ -188,11 +205,53 @@ def candidates(html, page_url, event):
                 continue
         except (KeyError, TypeError, ValueError):
             continue
-        for raw in image_urls(record.get('image') or metadata.meta.get('og:image')):
+        fallback = metadata.meta.get('og:image')
+        if host.endswith('.splashthat.com'):
+            # Splash's generated share card can be an empty theme template. Use
+            # explicitly named artwork belonging to this event, never that template.
+            event_id = re.search(r'/img/events/splash/cards/(\d+)\.', str(fallback))
+            fallback = []
+            for raw in metadata.images:
+                path = unquote(urlsplit(raw).path)
+                filename = re.sub(r'^[a-fA-F0-9]{12,}\.', '', path.rsplit('/', 1)[-1]).rsplit('.', 1)[0]
+                if (event_id and re.search(r'/img/events/id/\d+/' + event_id[1] + r'/assets/', path)
+                        and matching_name(filename, record['name'])):
+                    fallback.append(raw)
+        for raw in image_urls([record.get('image'), fallback]):
             url = original_image(raw, page_url)
             if url and url not in result:
                 result.append(url)
     return result[:3]
+
+
+def source_candidates(link, event, reader):
+    """Read only the public event endpoint needed for a linked EventHi listing."""
+    if urlsplit(link).hostname not in {'eventhi.io', 'www.eventhi.io'}:
+        data, final_url = reader(link, 'page')
+        return candidates(data.decode('utf-8', errors='replace'), final_url, event), final_url
+    slug = urlsplit(link).path.rstrip('/').split('/')[-1]
+    endpoint = 'https://api.eventhi.io/api/upcoming-events/name-slug/' + slug
+    data, final_url = reader(endpoint, 'api')
+    if final_url != endpoint:
+        return [], link
+    record = nested(json.loads(data), 'eventDetails')
+    if (record.get('private') is not False or record.get('status') != 'Published' or record.get('canceledAt')
+            or record.get('nameSlug') != slug or str(record.get('id')) != slug.rsplit('-', 1)[-1]):
+        return [], link
+    # The calendar says "Dime Bag Cannabis Comedy"; EventHi says "Dime Bag Comedy Show".
+    # Only this source ignores these descriptors, retaining slug, ID and date checks.
+    def title(value):
+        return ' '.join(w for w in re.findall(r'\w+', str(value).casefold()) if w not in {'cannabis', 'show'})
+    if not matching_name(title(record.get('name', '')), title(event['title'])):
+        return [], link
+    artwork = record.get('imageUrl', '')
+    if not isinstance(artwork, str) or not re.fullmatch(re.escape(str(record['id'])) + r'/images/[A-Za-z0-9_.-]+', artwork):
+        return [], link
+    structured = {'@type': 'Event', 'name': event['title'], 'url': link,
+                  'startDate': record.get('startsAt'), 'endDate': record.get('endsAt'),
+                  'image': 'https://d20jvj0ju92u0f.cloudfront.net/' + artwork}
+    html = '<script type="application/ld+json">' + json.dumps(structured) + '</script>'
+    return candidates(html, link, event), link
 
 
 def optimize(data):
@@ -289,8 +348,7 @@ def discover(events, root, now=None, reader=read_public):
         selected = None
         for link in links:
             try:
-                data, final_url = reader(link, 'page')
-                urls = candidates(data.decode('utf-8', errors='replace'), final_url, event)
+                urls, final_url = source_candidates(link, event, reader)
             except Exception:
                 continue
             for url in urls:

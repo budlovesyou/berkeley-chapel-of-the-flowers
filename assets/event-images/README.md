@@ -25,13 +25,29 @@ Community Survival Program listings use the undated Chapel gathering photo from
 the BPPALN holistic-health program gallery, selected by Justin on October 30, 2026.
 The 23 exact event UIDs cover the historical listings and ongoing monthly series.
 
-No verified artwork was found for the remaining Shefa, Cannabis Author Showcase, Dime Bag, postponed Fantasy Waltz, and Richard Lee
-memorial listings; they deliberately retain their text presentation.
+The seven previously imageless occurrences were filled on October 30, 2026:
+
+- Dime Bag: the automatic EventHi adapter retrieved the exact February 13 event's artwork.
+- Cannabis Author Showcase: the event-specific book-and-botanical graphic from Splash.
+  Its generated Open Graph share card was mostly blank and was rejected.
+- Fantasy Waltz: the promotional musicians-at-the-Chapel photo from the organizer's
+  Funcheap listing for April 25, 2025. The calendar's POSTPONED label is unchanged.
+- Two Shefa Prayer and Song Circles: named guide Lior Tsarfaty's portrait from
+  Chochmat HaLev, where he is musical director. Both original event pages return 404.
+- Shefa Breathwork: named guide Hagit Cohen's portrait from her own official biography;
+  the original event page returns 404.
+- Richard Lee memorial: his portrait from Oaksterdam's official tribute. This is
+  a portrait of the person named in the calendar, not a flyer or event photograph.
+
+These six researched historical selections use the existing manual override system;
+Dime Bag uses the automatic occurrence cache. Every entry retains its original URL
+and selection notes. The 109 current calendar occurrences now all have an image.
 
 ## Automatic discovery
 
-The scheduled `calendar_feed.py --discover-images` run also checks public Eventbrite,
-Partiful, and Luma event links for missing images. It requires matching event titles
+The scheduled `calendar_feed.py --discover-images` run checks public Eventbrite,
+Partiful, Luma, EventHi, Splash event subdomains, Shefa program/event pages, and
+Funcheap event links for missing images. It requires matching event titles
 and dates from the page's structured data. A linked organizer homepage, missing date,
 blocked page, or uncertain match leaves the listing without automatically chosen
 artwork. No general web search service, API key, or paid image service is used.
@@ -54,3 +70,23 @@ decoded, limited to 20 megapixels, and saved as WebP at most 1200 pixels per sid
 The workflow commits the manifest and new assets together with the generated page.
 Original source URLs and discovery dates are retained in each automatic entry.
 Run `python -m unittest discover -s test` to verify the behavior.
+
+### Source-specific behavior and limits
+
+EventHi's public page is a JavaScript shell. The worker reads only its anonymous
+`/api/upcoming-events/name-slug/<slug>` endpoint, verifies the exact slug and event
+ID, public/published state, title and local date, then downloads from EventHi's own
+CDN. For this source only, title comparison ignores the descriptors “cannabis” and
+“show” (the calendar and EventHi use different titles for Dime Bag).
+
+Splash, Shefa and Funcheap must expose matching JSON-LD Event metadata. A Shefa
+product page with no event date cannot qualify. Splash's generated share cards
+can contain blank theme placeholders; the adapter instead accepts a declared
+JSON-LD image or an image asset whose filename matches the verified event title
+and whose path belongs to the event ID in the share-card URL. Funcheap sometimes
+supplies an 80-pixel thumbnail; the larger Open Graph image is also tried.
+
+Some Splash and Funcheap pages reject automated requests even while displaying in
+a normal browser; deleted Shefa pages return 404. Those cases remain best-effort
+and may require an explicitly verified manual selection. The scheduled worker does
+not guess portraits, perform broad web searches, or bypass access restrictions.
