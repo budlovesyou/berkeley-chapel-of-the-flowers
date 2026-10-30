@@ -20,6 +20,9 @@ third-party image requests or image-search dependencies in the publishing job.
 Sources verified October 30, 2026: public Eventbrite and Partiful listings, Luma,
 the linked Phipps Pt. Bandcamp album, bud.com's event page, and existing Chapel
 photography of Singing the Great Turning. Each image's source is in the manifest.
-No verified artwork was found for the remaining Community Survival Program,
-Shefa, Cannabis Author Showcase, Dime Bag, postponed Fantasy Waltz, and Richard Lee
+Community Survival Program listings use the undated Chapel gathering photo from
+the BPPALN holistic-health program gallery, selected by Justin on October 30, 2026.
+The 23 exact event UIDs cover the historical listings and ongoing monthly series.
+
+No verified artwork was found for the remaining Shefa, Cannabis Author Showcase, Dime Bag, postponed Fantasy Waltz, and Richard Lee
 memorial listings; they deliberately retain their text presentation.
