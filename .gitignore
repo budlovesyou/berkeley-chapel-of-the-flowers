@@ -3,3 +3,7 @@ Default.html
 
 __pycache__/
 *.pyc
+
+# Incomplete optional artwork writes must never be published.
+event-images.json.tmp
+assets/event-images/*.tmp

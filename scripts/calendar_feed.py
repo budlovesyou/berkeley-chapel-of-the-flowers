@@ -10,6 +10,7 @@ import argparse, hashlib, json, re
 from icalendar import Calendar, Event
 import recurring_ical_events
 from remove_cancelled_events import EventBlocks
+from event_images import image_key, load_images, run_discovery
 
 ZONE = ZoneInfo('America/Los_Angeles')
 VENUE = 'Chapel of the Flowers, 3049 Adeline Street, Berkeley, CA 94703'
@@ -170,9 +171,9 @@ def render_page(events,calendar_id,now=None,images=None):
     now=now or datetime.now(ZONE)
     images=images or {}
     upcoming=[e for e in events if e['end']>now]; past=sorted((e for e in events if e['end']<=now),key=lambda e:e['start'],reverse=True)
-    upcoming_html=''.join(card(e,images.get(e['uid'])) for e in upcoming) or '<div class="empty"><h3>More gatherings to come</h3><p>New public events will appear here once they’re announced. Subscribe to the calendar to stay in the loop.</p></div>'
+    upcoming_html=''.join(card(e,images.get(e['uid']) or images.get(image_key(e))) for e in upcoming) or '<div class="empty"><h3>More gatherings to come</h3><p>New public events will appear here once they’re announced. Subscribe to the calendar to stay in the loop.</p></div>'
     years=sorted({e['start'].year for e in past},reverse=True)
-    history=''.join(f'<details class="archive-year"><summary>{year} <span>{sum(e["start"].year==year for e in past)} {"event" if sum(e["start"].year==year for e in past)==1 else "events"}</span></summary><div class="event-grid">'+''.join(card(e,images.get(e['uid'])) for e in past if e['start'].year==year)+'</div></details>' for year in years) or '<p>Past public events will appear here.</p>'
+    history=''.join(f'<details class="archive-year"><summary>{year} <span>{sum(e["start"].year==year for e in past)} {"event" if sum(e["start"].year==year for e in past)==1 else "events"}</span></summary><div class="event-grid">'+''.join(card(e,images.get(e['uid']) or images.get(image_key(e))) for e in past if e['start'].year==year)+'</div></details>' for year in years) or '<p>Past public events will appear here.</p>'
     encoded=quote(calendar_id,safe=''); subscribe='https://calendar.google.com/calendar/u/0/r?cid='+encoded
     ics='https://calendar.google.com/calendar/ical/'+encoded+'/public/basic.ics'
     template=(ROOT/'events.template.html').read_text()
@@ -213,17 +214,15 @@ def build_manifest(html):
     return {'version':1,'sourceSha256':hashlib.sha256(html.encode()).hexdigest(),'sourceListings':listings,'events':list(events.values()),'notes':['Displayed historical times and original public descriptions preserved, including any differences between them. Postponed titles remain labeled.']}
 
 def main():
-    parser=argparse.ArgumentParser();parser.add_argument('--manifest-from');parser.add_argument('--output');parser.add_argument('--feed-file');args=parser.parse_args()
+    parser=argparse.ArgumentParser();parser.add_argument('--manifest-from');parser.add_argument('--output');parser.add_argument('--feed-file');parser.add_argument('--discover-images',action='store_true',help='Look for missing artwork on supported linked event pages');args=parser.parse_args()
     if args.manifest_from:
         manifest=build_manifest(Path(args.manifest_from).read_text());Path(args.output).write_text(json.dumps(manifest,indent=2,ensure_ascii=False)+'\n');print(json.dumps({'listings':len(manifest['sourceListings']),'events':len(manifest['events'])}));return
     cfg=json.loads((ROOT/'public-calendar.json').read_text());target=Path(args.output) if args.output else ROOT/'events.html';now=datetime.now(ZONE)
     old=target.read_text() if target.exists() else '';count=re.search(r'data-event-count="(\d+)"',old)
     url='https://calendar.google.com/calendar/ical/'+quote(cfg['calendarId'],safe='')+'/public/basic.ics'
     events=parse_feed(Path(args.feed_file).read_bytes(),now) if args.feed_file else fetch_verified(url,int(count[1]) if count else 0,now)
-    image_file=ROOT/'event-images.json'
-    images=json.loads(image_file.read_text())['events'] if image_file.exists() else {}
-    # Artwork is optional: a missing asset must never hide a public event.
-    images={uid:img for uid,img in images.items() if event_image(img) and (ROOT/img['src']).is_file()}
+    if args.discover_images: run_discovery(events,ROOT)
+    images=load_images(events,ROOT)
     page=render_page(events,cfg['calendarId'],now,images=images)
     write_calendar_files(events,target.parent/'calendar',now)
     # Atomic replacement happens only after a complete fetch, parse, render and export.
