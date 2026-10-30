@@ -148,7 +148,7 @@ def render_page(events,calendar_id,now=None):
     encoded=quote(calendar_id,safe=''); subscribe='https://calendar.google.com/calendar/u/0/r?cid='+encoded
     ics='https://calendar.google.com/calendar/ical/'+encoded+'/public/basic.ics'
     template=(ROOT/'events.template.html').read_text()
-    values={'UPCOMING':upcoming_html,'ARCHIVE':history,'SUBSCRIBE':escape(subscribe,quote=True),'ICS':escape(ics,quote=True),'UPDATED':now.strftime('%B %-d, %Y at %-I:%M %p'),'UPDATED_ISO':now.isoformat(),'COUNT':str(len(events))}
+    values={'STYLE_VERSION':hashlib.sha256((ROOT/'assets/events.css').read_bytes()).hexdigest()[:12],'UPCOMING':upcoming_html,'ARCHIVE':history,'SUBSCRIBE':escape(subscribe,quote=True),'ICS':escape(ics,quote=True),'UPDATED':now.strftime('%B %-d, %Y at %-I:%M %p'),'UPDATED_ISO':now.isoformat(),'COUNT':str(len(events))}
     for name,value in values.items(): template=template.replace('{{'+name+'}}',value)
     return '\n'.join(line.rstrip() for line in template.splitlines())+'\n'
 
