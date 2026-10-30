@@ -1,0 +1,22 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Chapel of the Flowers//Public Events//EN
+BEGIN:VEVENT
+SUMMARY:CBCB X Comedy Come Up : The Cultivated Comedy Experience
+DTSTART:20261107T002000Z
+DTEND:20261107T040000Z
+DTSTAMP:20261030T170407Z
+UID:a23d988e6565ebc4fb1c25a7011caf3f@chapeloftheflowers.love
+CLASS:PUBLIC
+DESCRIPTION:A 21+ comedy and music event presented by CBCB and Comedy Come
+  Up\, featuring Joe Hill\, Sophia Garrow\, Marcus Williams\, Ivy Vazquez\,
+  and Wally Hipolito.\n\nEvent: 4:20–8:00 PM. Comedy starts at 6:00 PM. F
+ ree parking available.\n\nTickets\, registration\, and current event infor
+ mation:\nhttps://www.eventbrite.com/e/cbcb-x-comedy-come-up-the-cultivated
+ -comedy-experience-tickets-2002604579205
+LOCATION:Berkeley Chapel of the Flowers\, 3049 Adeline Street\, Berkeley\,
+  CA 94703
+URL:https://www.eventbrite.com/e/cbcb-x-comedy-come-up-the-cultivated-come
+ dy-experience-tickets-2002604579205
+END:VEVENT
+END:VCALENDAR
