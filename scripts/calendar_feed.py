@@ -132,10 +132,13 @@ def display_description(e):
     lines=e['description'].splitlines()
     labels={'tickets:', 'tickets & information:', 'tickets and information:',
             'tickets, registration, and current event information:',
-            'ticket link:', 'registration:', 'more information:'}
+            'ticket link:', 'registration:', 'more information:',
+            'original eventbrite listing:'}
     result=[]
     for line in lines:
-        if line.strip() in e['links']:
+        text=line.strip()
+        labeled_link=any(text.casefold().startswith(label) and text[len(label):].strip() in e['links'] for label in labels)
+        if text in e['links'] or labeled_link:
             while result and not result[-1].strip(): result.pop()
             if result and result[-1].strip().casefold() in labels: result.pop()
             continue
@@ -146,7 +149,7 @@ def card(e):
     start,end=e['start'],e['end']
     day=start.strftime('%A, %B %-d, %Y')
     if e['allDay']:
-        last=(end-timedelta(days=1)).date(); hours='All day'+(f' · through {last:%B %d, %Y}' if last!=start.date() else '')
+        last=(end-timedelta(days=1)).date(); hours='All day'+(f' · through {last:%B %-d, %Y}' if last!=start.date() else '')
     else:
         hours=f'{start:%-I:%M %p} – '+(f'{end:%B %-d, %Y}, ' if end.date()!=start.date() else '')+f'{end:%-I:%M %p}'
     description_text=display_description(e)
@@ -160,7 +163,7 @@ def render_page(events,calendar_id,now=None):
     upcoming=[e for e in events if e['end']>now]; past=sorted((e for e in events if e['end']<=now),key=lambda e:e['start'],reverse=True)
     upcoming_html=''.join(card(e) for e in upcoming) or '<div class="empty"><h3>More gatherings to come</h3><p>New public events will appear here once they’re announced. Subscribe to the calendar to stay in the loop.</p></div>'
     years=sorted({e['start'].year for e in past},reverse=True)
-    history=''.join(f'<details class="archive-year"><summary>{year} <span>{sum(e["start"].year==year for e in past)} events</span></summary><div class="event-grid">'+''.join(card(e) for e in past if e['start'].year==year)+'</div></details>' for year in years) or '<p>Past public events will appear here.</p>'
+    history=''.join(f'<details class="archive-year"><summary>{year} <span>{sum(e["start"].year==year for e in past)} {"event" if sum(e["start"].year==year for e in past)==1 else "events"}</span></summary><div class="event-grid">'+''.join(card(e) for e in past if e['start'].year==year)+'</div></details>' for year in years) or '<p>Past public events will appear here.</p>'
     encoded=quote(calendar_id,safe=''); subscribe='https://calendar.google.com/calendar/u/0/r?cid='+encoded
     ics='https://calendar.google.com/calendar/ical/'+encoded+'/public/basic.ics'
     template=(ROOT/'events.template.html').read_text()
