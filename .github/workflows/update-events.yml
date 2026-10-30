@@ -1,4 +1,4 @@
-name: Publish Approved Public Events
+name: Publish Public Calendar Events
 on:
   schedule:
     - cron: '12,27,42,57 * * * *'
@@ -9,22 +9,27 @@ concurrency:
   group: public-event-cleanup
   cancel-in-progress: false
 jobs:
-  cleanup:
+  publish:
     runs-on: ubuntu-latest
     timeout-minutes: 5
     steps:
       - uses: actions/checkout@v4
-      - name: Test publication and cancellation matching
-        run: python3 -m unittest discover -s test
-      - name: Reconcile explicitly approved public events
-        env:
-          AIRTABLE_API_KEY: ${{ secrets.AIRTABLE_API_KEY }}
-        run: python3 scripts/remove_cancelled_events.py
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.13'
+          cache: pip
+          cache-dependency-path: requirements-events.txt
+      - name: Install ICS parser
+        run: python -m pip install -r requirements-events.txt
+      - name: Test public calendar rendering
+        run: python -m unittest discover -s test
+      - name: Read anonymous public calendar and generate page
+        run: python scripts/calendar_feed.py
       - name: Publish verified changes
         run: |
           if git diff --quiet -- events.html; then exit 0; fi
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
           git add events.html
-          git commit -m 'Sync explicitly approved public events'
+          git commit -m 'Refresh public calendar events'
           git push origin HEAD:main

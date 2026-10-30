@@ -1,201 +1,221 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Events at Chapel of the Flowers</title>
-    <link rel="stylesheet" href="styles.css">
-    <style>
-        body {
-            font-family: 'Merriweather', serif;
-            background-color: #fdf6e3;
-            color: #333;
-            margin: 0;
-            padding: 0;
-        }
-        .header {
-            background: url('header-image.jpg') no-repeat center center;
-            background-size: cover;
-            text-align: center;
-            color: white;
-            padding: 60px 20px;
-        }
-        .header h1 {
-            font-size: 36px;
-            margin: 0;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
-        }
-        .container {
-            width: 80%;
-            max-width: 800px;
-            margin: auto;
-            padding: 20px;
-        }
-        h2 {
-            text-align: center;
-            color: #6b4226;
-        }
-        .event_deets {
-            background: #fff;
-            padding: 20px;
-            margin: 20px auto;
-            border-radius: 8px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            max-width: 600px;
-        }
-        .event_deets h3 {
-            margin-top: 0;
-            color: #4a2d19;
-        }
-        .event_description {
-            display: none;
-            padding: 10px;
-            background: #f4e3d7;
-            margin-top: 10px;
-            border-radius: 5px;
-            border-left: 4px solid #6b4226;
-        }
-        .toggle-btn, .host-event-btn {
-            background: #6b4226;
-            color: white;
-            padding: 10px 15px;
-            border: none;
-            cursor: pointer;
-            margin-top: 10px;
-            border-radius: 4px;
-            font-size: 14px;
-        }
-        .toggle-btn:hover, .host-event-btn:hover {
-            background: #4a2d19;
-        }
-        .host-event-container {
-            text-align: center;
-            margin-top: 20px;
-        }
-        .footer {
-            text-align: center;
-            padding: 20px;
-            background: #6b4226;
-            color: white;
-            margin-top: 40px;
-        }
-        .footer a {
-            color: white;
-            text-decoration: underline;
-        }
-    </style>
-    <script>
-        function toggleDescription(button) {
-            let description = button.nextElementSibling;
-            if (description.style.display === "none" || description.style.display === "") {
-                description.style.display = "block";
-                button.textContent = "Hide Details";
-            } else {
-                description.style.display = "none";
-                button.textContent = "Show Details";
-            }
-        }
-    </script>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Public Events | Berkeley Chapel of the Flowers</title>
+<meta name="description" content="Discover public gatherings, music, community events and more at Berkeley’s historic Chapel of the Flowers. Explore upcoming events and subscribe to our calendar.">
+<link rel="stylesheet" href="assets/events.css">
 </head>
-<body>
-    <div class="header">
-        <h1>Events at Chapel of the Flowers</h1>
-    </div>
-    
-    <div class="container">
-    
-    <p>Please note: we host private events that are not listed here. Please contact us for availability.</p>
-    
-        <h2>Upcoming Events</h2>
+<body data-event-count="40">
+<a class="skip-link" href="#events">Skip to events</a>
+<header class="hero"><nav><a class="wordmark" href="index.html">Chapel of the Flowers<span>BERKELEY, CALIFORNIA</span></a><a href="index.html#contact">Get in touch</a></nav><div class="hero-copy"><p class="eyebrow">A place to gather</p><h1>Good things<br>happen here.</h1><p>Music, connection, and community<br>in a chapel with a century of stories.</p></div></header>
+<main id="events">
+<section class="intro"><div><p class="eyebrow">The public calendar</p><h2>Come join us.</h2><p>Explore what’s happening at the Chapel.<br>All times are local to Berkeley.</p></div><div class="subscribe"><a class="button" href="https://calendar.google.com/calendar/u/0/r?cid=29e0d686a60a2707cba6cf15778c26fc2a768bb6d29e00b2bdb3d77f1d4103e2%40group.calendar.google.com">Subscribe in Google Calendar <span aria-hidden="true">↗</span></a><a href="https://calendar.google.com/calendar/ical/29e0d686a60a2707cba6cf15778c26fc2a768bb6d29e00b2bdb3d77f1d4103e2%40group.calendar.google.com/public/basic.ics">Subscribe with another calendar</a></div></section>
+<aside class="availability">We also host private events that aren’t listed here. <a href="mailto:berkeleychapeloftheflowers@gmail.com">Contact us for venue availability.</a></aside>
+<section aria-labelledby="upcoming-title"><div class="section-heading"><h2 id="upcoming-title">Upcoming events</h2><span>See you at the Chapel</span></div><div class="event-grid"><div class="empty"><h3>More gatherings to come</h3><p>New public events will appear here once they’re announced. Subscribe to the calendar to stay in the loop.</p></div></div></section>
+<section class="archive" aria-labelledby="past-title"><div class="section-heading"><h2 id="past-title">Past events</h2><span>A little of our history</span></div><details class="archive-year"><summary>2026 <span>1 events</span></summary><div class="event-grid"><article class="event-card"><p class="event-date"><time datetime="2026-02-13T19:00:00-08:00">Friday, February 13, 2026</time></p><h3>Dime Bag Cannabis Comedy</h3><p class="event-time">7:00 PM – 10:00 PM</p><details class="event-details"><summary>Event details</summary><div class="description">Dime Bag Comedy night!
 
-        <div id="upcoming-events">
+Hosted by Ngaio Bealum
 
-            <p>Check back for upcoming events.</p>
-        </div>
+Join us for a night of epic comedy at Berkeley&#x27;s Chapel of Flowers, the coolest new spot in the East Bay.
 
-        <h2>Previous Events</h2>
-        <div id="previous-events">
+Host Ngaio Bealum (Netflix, Tubi, and more) has personally curated a hilarious lineup of the best comedians in the Country. The venue is 420 friendly and there will be snacks. See you there!
 
-<div class="event_deets">
-<h3>Community Survival Program</h3>
-<p>Sunday January 19 2025 11:00 AM until 2:00 PM</p>
-<button class="toggle-btn" onclick="toggleDescription(this)">Show Details</button>
-<div class="event_description"><p>Holistic Health Event: Providing access, services & education to whole plant medicine. The holistic health initiative is a continuation of the iconic health legacy of preventative healthcare programs created by the original Black Panther Party. 
+Free parking, directly across from Ashby BART.
 
-This program promotes free, accessible, alternative healthcare, education & positive lifestyle services.
+https://eventhi.io/events/dime-bag-comedy-show-13584</div></details><div class="event-links"><a class="event-link" href="https://eventhi.io/events/dime-bag-comedy-show-13584" rel="noopener noreferrer">Tickets &amp; information <span aria-hidden="true">↗</span></a></div></article></div></details><details class="archive-year"><summary>2025 <span>39 events</span></summary><div class="event-grid"><article class="event-card"><p class="event-date"><time datetime="2025-11-16T11:00:00-08:00">Sunday, November 16, 2025</time></p><h3>Community Survival Program November</h3><p class="event-time">11:00 AM – 1:30 PM</p><details class="event-details"><summary>Event details</summary><div class="description">Holistic Health Event: Providing access, services &amp; education to whole plant medicine. The holistic health initiative is a continuation of the iconic health legacy of preventative healthcare programs created by the original Black Panther Party.
+
+This program promotes free, accessible, alternative healthcare, education &amp; positive lifestyle services.
 
 - Free Food
 - Community Orgs
 - Pharmacist Consultation
 
-Presented by the Black Panther Party Alumni Legacy Network with CBCB dispensary and Redwood Roots Distribution.</p>
-</div>
-</div>
+Presented by the Black Panther Party Alumni Legacy Network with CBCB dispensary and Redwood Roots Distribution.</div></details><div class="event-links"></div></article><article class="event-card"><p class="event-date"><time datetime="2025-11-11T19:00:00-08:00">Tuesday, November 11, 2025</time></p><h3>Inner Peace Sound Bath November</h3><p class="event-time">7:00 PM – 9:00 PM</p><details class="event-details"><summary>Event details</summary><div class="description">Join Blue Muse sound healing &amp; Luiza Leite for a blissfulsound bath experience at the Chapel of Flowers in Berkeley, former marmot castle. Easily accessible it’s across the street from Ashby Bart and there’s free parking.
 
-<div class="event_deets">
-<h3>Community Survival Program</h3>
-<p>Sunday February 16 2025 11:00 AM until 2:00 PM</p>
-<button class="toggle-btn" onclick="toggleDescription(this)">Show Details</button>
-<div class="event_description"><p>Holistic Health Event: Providing access, services & education to whole plant medicine. The holistic health initiative is a continuation of the iconic health legacy of preventative healthcare programs created by the original Black Panther Party. 
+Immerse yourself in a soothing sound bath that will transport you to a state of deep relaxation and inner peace. Let the gentle vibrations of crystal singing bowls, gongs, Handpan &amp; other instruments wash away stress and tension. Allow your mind to unwind and your body to rejuvenate as the harmonious sounds envelop you.
 
-This program promotes free, accessible, alternative healthcare, education & positive lifestyle services.
+A powerful experience to nurture your mind, body, and soul. Doors open at 6:30 &amp; Sound Bath starts promptly 7pm, no late arrivals admitted. Bring a water bottle, a yoga mat and whatever you need to be comfortable and drop into a relaxed state. Looking forward to serenading you!
+
+https://www.eventbrite.com/e/inner-peace-sound-bath-at-the-chapel-of-the-flowers-in-berkeley-tickets-1564530445679?aff=oddtdtcreator</div></details><div class="event-links"><a class="event-link" href="https://www.eventbrite.com/e/inner-peace-sound-bath-at-the-chapel-of-the-flowers-in-berkeley-tickets-1564530445679?aff=oddtdtcreator" rel="noopener noreferrer">Tickets &amp; information <span aria-hidden="true">↗</span></a></div></article><article class="event-card"><p class="event-date"><time datetime="2025-11-09T12:00:00-08:00">Sunday, November 9, 2025</time></p><h3>Memorial for Richard Lee</h3><p class="event-time">12:00 PM – 10:00 PM</p><details class="event-details"><summary>Event details</summary><div class="description">Cannabis activist, pioneer, advocate for human rights. Helped educate many. Specific time and details to follow.</div></details><div class="event-links"></div></article><article class="event-card"><p class="event-date"><time datetime="2025-11-07T19:00:00-08:00">Friday, November 7, 2025</time></p><h3>Love Never Faileth: A night of musical merriment</h3><p class="event-time">7:00 PM – 10:00 PM</p><details class="event-details"><summary>Event details</summary><div class="description">We cordially invite you into a night of ethereal sounds and fantastical fairy frolicking in Berkeley’s Chapel of Flowers.
+
+✨Fairytale/fantasy attire is highly encouraged✨
+
+Featuring the sonic wonders of:
+
+Waterstrider
+Animal Prince
+Child of the Mountain
+
+There will also be a tea lounge, as well as other donation-based beverages available for your pleasure.
+
+$20 advance/$25 day-of
+
+7pm doors, music to follow shortly after
+
+*Animal Prince and Waterstrider will be debuting a new collaborative song (releasing the same day!)*
+
+https://partiful.com/e/MXUSRBBeeflfyE9eED0g?</div></details><div class="event-links"><a class="event-link" href="https://partiful.com/e/MXUSRBBeeflfyE9eED0g?" rel="noopener noreferrer">Tickets &amp; information <span aria-hidden="true">↗</span></a></div></article><article class="event-card"><p class="event-date"><time datetime="2025-11-02T15:00:00-08:00">Sunday, November 2, 2025</time></p><h3>Blue Heart&#x27;s Fall Fundraiser Celebration</h3><p class="event-time">3:00 PM – 6:00 PM</p><details class="event-details"><summary>Event details</summary><div class="description">Whether you&#x27;ve been a Blue Heart member for years, are a community partner who&#x27;s received support from Blue Heart in the past, or are curious to get to know the organization, our Fall Fundraiser Celebration will have something for everyone.
+
+Join us to hear from a panel of passionate Bay Area community organizations doing inspiring work, visit organizations at their fun tables, build community with likeminded Bay Area residents, and support Blue Heart to walk into another successful year.
+
+Snacks and drinks provided. Kids play area will be offered with light supervision.
+
+Reach out if you are able to support with donating raffle items, food, drinks, or something else you&#x27;d like to contribute: eva@blueheartaction.org
+
+https://www.eventbrite.com/e/blue-hearts-fall-fundraiser-celebration-tickets-1641091772669?aff=oddtdtcreator</div></details><div class="event-links"><a class="event-link" href="https://www.eventbrite.com/e/blue-hearts-fall-fundraiser-celebration-tickets-1641091772669?aff=oddtdtcreator" rel="noopener noreferrer">Tickets &amp; information <span aria-hidden="true">↗</span></a></div></article><article class="event-card"><p class="event-date"><time datetime="2025-11-01T17:00:00-07:00">Saturday, November 1, 2025</time></p><h3>Snacks Attack! A Halloween Hangover Burlesque</h3><p class="event-time">5:00 PM – 10:00 PM</p><details class="event-details"><summary>Event details</summary><div class="description">Punani Productions Presents:
+
+SNACKS ATTACK!
+A Halloween-Hangover Burlesque Show
+🍕🥨🌯🧁🍿🥜🍩🍔🍪🍌🥓🍨🍭
+
+Doors at 7:30 pm
+Show at 8 pm
+Dance party to follow!
+
+Tickets available at the door: $15-25 sliding scale (cash or Venmo accepted)
+
+Hosted by Liza Punani
+
+More details coming soon…
+
+https://partiful.com/e/A9f11VXcJ4iji1CMjvM2</div></details><div class="event-links"><a class="event-link" href="https://partiful.com/e/A9f11VXcJ4iji1CMjvM2" rel="noopener noreferrer">Tickets &amp; information <span aria-hidden="true">↗</span></a></div></article><article class="event-card"><p class="event-date"><time datetime="2025-10-31T19:30:00-07:00">Friday, October 31, 2025</time></p><h3>Curse Removal Pop-Up</h3><p class="event-time">7:30 PM – 11:00 PM</p><details class="event-details"><summary>Event details</summary><div class="description">Get ready for a Halloween like no other 🔮
+
+A fusion of community celebration, healing and hex removal. Our goal is to create a positive immersive experience where people can connect and get elevated.
+
+Tickets are all inclusive ✨
+-Eats by Big Bad Wolf SF!
+-Tarot, Reiki, Soul Records, Energy Healing
+-Massage w/ Blue Sage
+-Astrology &amp; Terps w/ Sol Spirit &amp; Humboldt Nation
+-Herbal Potion Making w/ Lady Gemini
+-Blind Sensory w/ Ay Papi &amp; Moon Made Farms
+-Herbal Tea Service w/ Mind Palace Herbs
+-Flavor discovery w/ Dr Dabber
+
+https://partiful.com/e/1C1aujik9P0Hq35hdHCa</div></details><div class="event-links"><a class="event-link" href="https://partiful.com/e/1C1aujik9P0Hq35hdHCa" rel="noopener noreferrer">Tickets &amp; information <span aria-hidden="true">↗</span></a></div></article><article class="event-card"><p class="event-date"><time datetime="2025-10-26T19:00:00-07:00">Sunday, October 26, 2025</time></p><h3>Full Body Sensory Music Journey w/ Zendo Stereo + Crescendo</h3><p class="event-time">7:00 PM – 9:00 PM</p><details class="event-details"><summary>Event details</summary><div class="description">3 Shows | October 24, 25 and 26 | 7-9 PM
+Join us for an immersive, full-body listening experience that invites you to slow down, tune in, and journey inward through music and vibration.
+This guided journey is a unique collaboration, combining Zendo Stereo methodology with Crescendo Research’s groundbreaking tactile audio technology for a collective journey through music.
+
+Experience the music through a Crescendo tactile floor, a room-sized somatic speaker that envelops your whole body with vibration and let music transport you beyond your imagination. Feel the deep resonance of the music through your body, not just your ears, enhancing the emotional impact of every note. You’ll be guided through Zendo Stereo, a deep listening ritual that blends thoughtfully curated music with simple yet powerful practices designed to down-regulate the nervous system, open space for inner reflection, and reconnect you with your deeper self.
+
+What to expect: A deep listening ritual pairing thoughtfully curated music through headphones with somatic practices designed to down-regulate the nervous system, open the heart, and awaken deeper reflection and connection.
+
+https://www.eventbrite.com/e/full-body-sensory-music-journey-w-zendo-stereo-crescendo-tickets-1778238963609?aff=oddtdtcreator&amp;utm_source=eventbrite&amp;utm_medium=email&amp;utm_campaign=post_publish&amp;utm_content=shortLinkNewEmail</div></details><div class="event-links"><a class="event-link" href="https://www.eventbrite.com/e/full-body-sensory-music-journey-w-zendo-stereo-crescendo-tickets-1778238963609?aff=oddtdtcreator&amp;utm_source=eventbrite&amp;utm_medium=email&amp;utm_campaign=post_publish&amp;utm_content=shortLinkNewEmail" rel="noopener noreferrer">Tickets &amp; information <span aria-hidden="true">↗</span></a></div></article><article class="event-card"><p class="event-date"><time datetime="2025-10-25T19:00:00-07:00">Saturday, October 25, 2025</time></p><h3>Full Body Sensory Music Journey w/ Zendo Stereo + Crescendo</h3><p class="event-time">7:00 PM – 9:00 PM</p><details class="event-details"><summary>Event details</summary><div class="description">3 Shows | October 24, 25 and 26 | 7-9 PM
+Join us for an immersive, full-body listening experience that invites you to slow down, tune in, and journey inward through music and vibration.
+This guided journey is a unique collaboration, combining Zendo Stereo methodology with Crescendo Research’s groundbreaking tactile audio technology for a collective journey through music.
+
+Experience the music through a Crescendo tactile floor, a room-sized somatic speaker that envelops your whole body with vibration and let music transport you beyond your imagination. Feel the deep resonance of the music through your body, not just your ears, enhancing the emotional impact of every note. You’ll be guided through Zendo Stereo, a deep listening ritual that blends thoughtfully curated music with simple yet powerful practices designed to down-regulate the nervous system, open space for inner reflection, and reconnect you with your deeper self.
+
+What to expect: A deep listening ritual pairing thoughtfully curated music through headphones with somatic practices designed to down-regulate the nervous system, open the heart, and awaken deeper reflection and connection.
+
+https://www.eventbrite.com/e/full-body-sensory-music-journey-w-zendo-stereo-crescendo-tickets-1778238963609?aff=oddtdtcreator&amp;utm_source=eventbrite&amp;utm_medium=email&amp;utm_campaign=post_publish&amp;utm_content=shortLinkNewEmail</div></details><div class="event-links"><a class="event-link" href="https://www.eventbrite.com/e/full-body-sensory-music-journey-w-zendo-stereo-crescendo-tickets-1778238963609?aff=oddtdtcreator&amp;utm_source=eventbrite&amp;utm_medium=email&amp;utm_campaign=post_publish&amp;utm_content=shortLinkNewEmail" rel="noopener noreferrer">Tickets &amp; information <span aria-hidden="true">↗</span></a></div></article><article class="event-card"><p class="event-date"><time datetime="2025-10-24T19:00:00-07:00">Friday, October 24, 2025</time></p><h3>Full Body Sensory Music Journey w/ Zendo Stereo + Crescendo</h3><p class="event-time">7:00 PM – 9:00 PM</p><details class="event-details"><summary>Event details</summary><div class="description">3 Shows | October 24, 25 and 26 | 7-9 PM
+Join us for an immersive, full-body listening experience that invites you to slow down, tune in, and journey inward through music and vibration.
+This guided journey is a unique collaboration, combining Zendo Stereo methodology with Crescendo Research’s groundbreaking tactile audio technology for a collective journey through music.
+
+Experience the music through a Crescendo tactile floor, a room-sized somatic speaker that envelops your whole body with vibration and let music transport you beyond your imagination. Feel the deep resonance of the music through your body, not just your ears, enhancing the emotional impact of every note. You’ll be guided through Zendo Stereo, a deep listening ritual that blends thoughtfully curated music with simple yet powerful practices designed to down-regulate the nervous system, open space for inner reflection, and reconnect you with your deeper self.
+
+What to expect: A deep listening ritual pairing thoughtfully curated music through headphones with somatic practices designed to down-regulate the nervous system, open the heart, and awaken deeper reflection and connection.
+
+https://www.eventbrite.com/e/full-body-sensory-music-journey-w-zendo-stereo-crescendo-tickets-1778238963609?aff=oddtdtcreator&amp;utm_source=eventbrite&amp;utm_medium=email&amp;utm_campaign=post_publish&amp;utm_content=shortLinkNewEmail</div></details><div class="event-links"><a class="event-link" href="https://www.eventbrite.com/e/full-body-sensory-music-journey-w-zendo-stereo-crescendo-tickets-1778238963609?aff=oddtdtcreator&amp;utm_source=eventbrite&amp;utm_medium=email&amp;utm_campaign=post_publish&amp;utm_content=shortLinkNewEmail" rel="noopener noreferrer">Tickets &amp; information <span aria-hidden="true">↗</span></a></div></article><article class="event-card"><p class="event-date"><time datetime="2025-10-19T11:00:00-07:00">Sunday, October 19, 2025</time></p><h3>Community Survival Program October</h3><p class="event-time">11:00 AM – 1:30 PM</p><details class="event-details"><summary>Event details</summary><div class="description">Holistic Health Event: Providing access, services &amp; education to whole plant medicine. The holistic health initiative is a continuation of the iconic health legacy of preventative healthcare programs created by the original Black Panther Party.
+
+This program promotes free, accessible, alternative healthcare, education &amp; positive lifestyle services.
 
 - Free Food
 - Community Orgs
 - Pharmacist Consultation
 
-Presented by the Black Panther Party Alumni Legacy Network with CBCB dispensary and Redwood Roots Distribution.</p></div></div>
+Presented by the Black Panther Party Alumni Legacy Network with CBCB dispensary and Redwood Roots Distribution.</div></details><div class="event-links"></div></article><article class="event-card"><p class="event-date"><time datetime="2025-10-08T19:00:00-07:00">Wednesday, October 8, 2025</time></p><h3>Record Release: SONGS WE NO LONGER SING by phipps pt.</h3><p class="event-time">7:00 PM – 10:00 PM</p><details class="event-details"><summary>Event details</summary><div class="description">Record Release Party for Songs We No Longer Sing. Here&#x27;s a writeup by Matt Sussman:
 
-<div class="event_deets"><h3>Laugh Your Ash Off</h3>
-<p>Saturday February 22 2025 7:00 PM until 9:00 PM</p>
-<button class="toggle-btn" onclick="toggleDescription(this)">Show Details</button>
-<div class="event_description"><p>Laugh Your Ash Off at this inaugural comedy show at the Ashby Social Club. Featuring host Ngaio Bealum, plus comedians Danielle Arce, Aivy Cordova, Alvin Duke Reid, and Victor Pacheco.
+Phipps Pt.&#x27;s second studio album – is a stunning song cycle which moves across vignettes of consumption, lust, grief, and what it takes to push through life at a moment when so many forces are marshaled against living.
 
-This is part of the Ashby Social Club series of learning experiences featuring comedy, music, and education. Proceeds from the sale of these tickets go to benefit local community programs.
+Sharrock’s gossamer vocals and delicately finger-picked guitar patterns find their complement in Leidecker’s equally sensitive approach to processing both, so that input frequently becomes indistinguishable from output. The album’s electronic glitches, buzzes, whirrs, and drones burnish rather than obscure Sharrock’s plaintive melodies and imagistic lyrics. Like practiced quilters, Phipps Pt. tenderly work their sonic material into a final composition whose design, no matter how abstract, never erases the traces of the human hands behind it.
 
-Hosted in a historic landmark venue in Berkeley, California: the Chapel of the Flowers.</p></div><a href="https://bud.com/buy-online/laugh-your-ash-off-february-2025-ticket/">Event Link</a></div>
+Sharrock often says at the start of a performance that Phipps Pt. is, “an idea and a place that we are going to together.” As with René Daumal’s Mount Analogue, Phipps Pt. is not a terminus but an occasion for the journey. Full of strange beauty and unexpected emotional candor, Songs We No Longer Sing issues a similarly generous invitation but with the added luxury that the listener is now able to partake of many return visits.
 
-<div class="event_deets"><h3>Singing the Great Turning 1</h3>
-<p>Monday March 3 2025 6:00 PM until 9:00 PM</p>
-<button class="toggle-btn" onclick="toggleDescription(this)">Show Details</button>
-<div class="event_description"><p>Join us for this 9-week in-person singing journey around the spiral of Joanna Macy's "The Work That Reconnects" with Jess Serrante of 'We Are The Great Turning' Podcast and Lauren Arrow, Songtender + Music Leader.
+https://phippspt.bandcamp.com/album/songs-we-no-longer-sing</div></details><div class="event-links"><a class="event-link" href="https://phippspt.bandcamp.com/album/songs-we-no-longer-sing" rel="noopener noreferrer">Tickets &amp; information <span aria-hidden="true">↗</span></a></div></article><article class="event-card"><p class="event-date"><time datetime="2025-10-07T19:00:00-07:00">Tuesday, October 7, 2025</time></p><h3>Inner Peace Sound Bath October</h3><p class="event-time">7:00 PM – 9:00 PM</p><details class="event-details"><summary>Event details</summary><div class="description">Join Blue Muse sound healing &amp; Luiza Leite for a blissfulsound bath experience at the Chapel of Flowers in Berkeley, former marmot castle. Easily accessible it’s across the street from Ashby Bart and there’s free parking.
 
-In these times of division and distraction, it’s more important than ever that we come together in community and cultivate practices that build resilience in the face of despair. By weaving song and The Work That Reconnects, our aim is to help nourish community and help us remember the work we are here to do.
+Immerse yourself in a soothing sound bath that will transport you to a state of deep relaxation and inner peace. Let the gentle vibrations of crystal singing bowls, gongs, Handpan &amp; other instruments wash away stress and tension. Allow your mind to unwind and your body to rejuvenate as the harmonious sounds envelop you.
 
-Each week we will use the foundations taught in the “We Are The Great Turning” podcast, which brings listeners to the kitchen table of legendary eco-spiritual teacher, and Berkeley local, Joanna Macy, interviewed by Jess Serrante. Each episode dives into what it takes to live with our hearts and integrity intact in this time of global crisis and helps us to explore abiding wisdom that can help us stay joyful and energized as we work toward a more just and life-sustaining world. ​</p></div><a href="https://www.processsing.com/greatturning">Event Link</a></div>
+A powerful experience to nurture your mind, body, and soul. Doors open at 6:30 &amp; Sound Bath starts promptly 7pm, no late arrivals admitted. Bring a water bottle, a yoga mat and whatever you need to be comfortable and drop into a relaxed state. Looking forward to serenading you!
 
-<div class="event_deets"><h3>Singing the Great Turning 2</h3>
-<p>Monday March 10 2025 6:00 PM until 9:00 PM</p>
-<button class="toggle-btn" onclick="toggleDescription(this)">Show Details</button>
-<div class="event_description"><p>Join us for this 9-week in-person singing journey around the spiral of Joanna Macy's "The Work That Reconnects" with Jess Serrante of 'We Are The Great Turning' Podcast and Lauren Arrow, Songtender + Music Leader.
+https://www.eventbrite.com/e/inner-peace-sound-bath-at-the-chapel-of-the-flowers-in-berkeley-tickets-1564530445679?aff=oddtdtcreator</div></details><div class="event-links"><a class="event-link" href="https://www.eventbrite.com/e/inner-peace-sound-bath-at-the-chapel-of-the-flowers-in-berkeley-tickets-1564530445679?aff=oddtdtcreator" rel="noopener noreferrer">Tickets &amp; information <span aria-hidden="true">↗</span></a></div></article><article class="event-card"><p class="event-date"><time datetime="2025-09-21T11:00:00-07:00">Sunday, September 21, 2025</time></p><h3>Community Survival Program September</h3><p class="event-time">11:00 AM – 1:30 PM</p><details class="event-details"><summary>Event details</summary><div class="description">Holistic Health Event: Providing access, services &amp; education to whole plant medicine. The holistic health initiative is a continuation of the iconic health legacy of preventative healthcare programs created by the original Black Panther Party.
 
-In these times of division and distraction, it’s more important than ever that we come together in community and cultivate practices that build resilience in the face of despair. By weaving song and The Work That Reconnects, our aim is to help nourish community and help us remember the work we are here to do.
-
-Each week we will use the foundations taught in the “We Are The Great Turning” podcast, which brings listeners to the kitchen table of legendary eco-spiritual teacher, and Berkeley local, Joanna Macy, interviewed by Jess Serrante. Each episode dives into what it takes to live with our hearts and integrity intact in this time of global crisis and helps us to explore abiding wisdom that can help us stay joyful and energized as we work toward a more just and life-sustaining world. ​</p></div><a href="https://www.processsing.com/greatturning">Event Link</a></div>
-
-<div class="event_deets"><h3>Community Survival Program</h3>
-<p>Sunday March 16 2025 11:00 AM until 2:00 PM</p>
-<button class="toggle-btn" onclick="toggleDescription(this)">Show Details</button>
-<div class="event_description"><p>Holistic Health Event: Providing access, services & education to whole plant medicine. The holistic health initiative is a continuation of the iconic health legacy of preventative healthcare programs created by the original Black Panther Party. 
-
-This program promotes free, accessible, alternative healthcare, education & positive lifestyle services.
+This program promotes free, accessible, alternative healthcare, education &amp; positive lifestyle services.
 
 - Free Food
 - Community Orgs
 - Pharmacist Consultation
 
-Presented by the Black Panther Party Alumni Legacy Network with CBCB dispensary and Redwood Roots Distribution.</p></div></div>
+Presented by the Black Panther Party Alumni Legacy Network with CBCB dispensary and Redwood Roots Distribution.</div></details><div class="event-links"></div></article><article class="event-card"><p class="event-date"><time datetime="2025-09-16T19:00:00-07:00">Tuesday, September 16, 2025</time></p><h3>Inner Peace Sound Bath September</h3><p class="event-time">7:00 PM – 9:00 PM</p><details class="event-details"><summary>Event details</summary><div class="description">Join Blue Muse sound healing &amp; Luiza Leite for a blissfulsound bath experience at the Chapel of Flowers in Berkeley, former marmot castle. Easily accessible it’s across the street from Ashby Bart and there’s free parking.
 
-<div class="event_deets"><h3>Shefa Prayer and Song Circle</h3>
-<p>Tuesday March 18 2025 6:00 PM until 9:00 PM</p>
-<button class="toggle-btn" onclick="toggleDescription(this)">Show Details</button>
-<div class="event_description"><p>Join us for an evening of prayer, song, and connection, as we come together in Jewish psychedelic community. Guided by Lior Tsarfaty and Rabbi Zac Kamenetz, we will weave our voices throughtraditional niggunim (wordless melodies), songs, and medicine music. This gathering invites deep connection—to ourselves, to one another, and to the Divine.
+Immerse yourself in a soothing sound bath that will transport you to a state of deep relaxation and inner peace. Let the gentle vibrations of crystal singing bowls, gongs, Handpan &amp; other instruments wash away stress and tension. Allow your mind to unwind and your body to rejuvenate as the harmonious sounds envelop you.
+
+A powerful experience to nurture your mind, body, and soul. Doors open at 6:30 &amp; Sound Bath starts promptly 7pm, no late arrivals admitted. Bring a water bottle, a yoga mat and whatever you need to be comfortable and drop into a relaxed state. Looking forward to serenading you!
+
+https://www.eventbrite.com/e/inner-peace-sound-bath-at-the-chapel-of-the-flowers-in-berkeley-tickets-1564530445679?aff=oddtdtcreator
+https://www.facebook.com/events/777002088070007/</div></details><div class="event-links"><a class="event-link" href="https://www.eventbrite.com/e/inner-peace-sound-bath-at-the-chapel-of-the-flowers-in-berkeley-tickets-1564530445679?aff=oddtdtcreator" rel="noopener noreferrer">Tickets &amp; information <span aria-hidden="true">↗</span></a><a class="event-link" href="https://www.facebook.com/events/777002088070007/" rel="noopener noreferrer">More information <span aria-hidden="true">↗</span></a></div></article><article class="event-card"><p class="event-date"><time datetime="2025-08-20T18:00:00-07:00">Wednesday, August 20, 2025</time></p><h3>Council of All Beings: A Community Ritual</h3><p class="event-time">6:00 PM – 9:00 PM</p><details class="event-details"><summary>Event details</summary><div class="description">In these times of unraveling and global crisis, many of us are searching for insight that can help us live, act, heal, and protect what we love. The Council of All Beings is a ritual developed by Joanna Macy and John Seed that helps us tap into the wild wisdom of the more-than-human world and remember that we ourselves are nature—part of a vibrant web of life rich with wisdom.
+
+https://partiful.com/e/52RIJkzpwE4tz60tDsyH</div></details><div class="event-links"><a class="event-link" href="https://partiful.com/e/52RIJkzpwE4tz60tDsyH" rel="noopener noreferrer">Tickets &amp; information <span aria-hidden="true">↗</span></a></div></article><article class="event-card"><p class="event-date"><time datetime="2025-08-17T11:00:00-07:00">Sunday, August 17, 2025</time></p><h3>Community Survival Program</h3><p class="event-time">11:00 AM – 1:30 PM</p><details class="event-details"><summary>Event details</summary><div class="description">Holistic Health Event: Providing access, services &amp; education to whole plant medicine. The holistic health initiative is a continuation of the iconic health legacy of preventative healthcare programs created by the original Black Panther Party.
+
+This program promotes free, accessible, alternative healthcare, education &amp; positive lifestyle services.
+
+- Free Food
+- Community Orgs
+- Pharmacist Consultation
+
+Presented by the Black Panther Party Alumni Legacy Network with CBCB dispensary and Redwood Roots Distribution.</div></details><div class="event-links"></div></article><article class="event-card"><p class="event-date"><time datetime="2025-07-22T18:00:00-07:00">Tuesday, July 22, 2025</time></p><h3>AI Hope vs Doom: A Blue Heart Debate and Social</h3><p class="event-time">6:00 PM – 9:00 PM</p><details class="event-details"><summary>Event details</summary><div class="description">Confused about the future of AI and accelerating technology? Wondering what to believe and how you can show up and find community in this strange time?
+You&#x27;re invited to an evening that blends fun, snacks, and serious questions about our future, with themed drinks and thoughtful company.
+
+​What to Expect:
+
+​🌀 Debate: “AI Hope vs Doom: Which future is more likely?”
+At 6:40, we’ll host a playful but real debate between Team Hope and Team Doom — framed around the future, tech, and justice. Audience participation encouraged (and rewarded)!
+
+​💬 Processing Circles + Real Action
+We’ll close with small group reflection and a concrete invitation to move your money, time, and power toward justice through Blue Heart.
+
+​💙 This event is part social, part salon, part soft call to action. Whether you&#x27;re deep in the giving game or new to these convos, this is a low-pressure space to reflect and connect.
+
+​🎭 A dress code invitation: match your outfit to your outlook! Wear brighter colors or sparkling accents if you’re feeling optimistic about our future, and darker tones if not.
+
+​Themed drinks &amp; snacks provided (mocktails, fruit &amp; cheese platter)
+
+​Why Now?
+
+​Things are weird. AI is moving fast, the world feels chaotic, it&#x27;s harder to tell what&#x27;s actually real, and the future is uncertain. But we can still do things that matter. This evening is about making space for that conversation — and building community around action.
+
+​Spots are limited — please reserve yours by July 15. Come curious, leave inspired.
+
+​Hosted by: Eva &amp; Stacey
+In collaboration with Blue Heart 💙
+Learn more here: Blue Heart
+
+https://www.blueheartaction.org/
+https://lu.ma/zwzjugh8</div></details><div class="event-links"><a class="event-link" href="https://www.blueheartaction.org/" rel="noopener noreferrer">Tickets &amp; information <span aria-hidden="true">↗</span></a><a class="event-link" href="https://lu.ma/zwzjugh8" rel="noopener noreferrer">More information <span aria-hidden="true">↗</span></a></div></article><article class="event-card"><p class="event-date"><time datetime="2025-07-20T11:00:00-07:00">Sunday, July 20, 2025</time></p><h3>Community Survival Program</h3><p class="event-time">11:00 AM – 1:30 PM</p><details class="event-details"><summary>Event details</summary><div class="description">Holistic Health Event: Providing access, services &amp; education to whole plant medicine. The holistic health initiative is a continuation of the iconic health legacy of preventative healthcare programs created by the original Black Panther Party.
+
+This program promotes free, accessible, alternative healthcare, education &amp; positive lifestyle services.
+
+- Free Food
+- Community Orgs
+- Pharmacist Consultation
+
+Presented by the Black Panther Party Alumni Legacy Network with CBCB dispensary and Redwood Roots Distribution.</div></details><div class="event-links"></div></article><article class="event-card"><p class="event-date"><time datetime="2025-06-15T11:00:00-07:00">Sunday, June 15, 2025</time></p><h3>Community Survival Program</h3><p class="event-time">11:00 AM – 1:30 PM</p><details class="event-details"><summary>Event details</summary><div class="description">Holistic Health Event: Providing access, services &amp; education to whole plant medicine. The holistic health initiative is a continuation of the iconic health legacy of preventative healthcare programs created by the original Black Panther Party.
+
+This program promotes free, accessible, alternative healthcare, education &amp; positive lifestyle services.
+
+- Free Food
+- Community Orgs
+- Pharmacist Consultation
+
+Presented by the Black Panther Party Alumni Legacy Network with CBCB dispensary and Redwood Roots Distribution.</div></details><div class="event-links"></div></article><article class="event-card"><p class="event-date"><time datetime="2025-06-10T18:00:00-07:00">Tuesday, June 10, 2025</time></p><h3>Shefa Prayer and Song Circle</h3><p class="event-time">6:00 PM – 9:00 PM</p><details class="event-details"><summary>Event details</summary><div class="description">Join us for an evening of prayer, song, and connection, as we come together in Jewish psychedelic community. Guided by Lior Tsarfaty, we’ll explore a range of Jewish vocal activation techniques including chant, medicine music, niggunim, and more. this gathering invites deep connection to ourselves, to one another, and to the Divine.
+
 This is an opportunity to hold each other in sacred space, to find renewal through melody and intention, and to catalyze communal connection in a time of great need.
 
 This gathering is rooted in Jewish tradition and welcomes everyone with an open heart.
-The Circle will take place on Tuesday, March 18th from 6:30-8:30pm at 3049 Adeline St, Berkeley, CA 94703
+The Circle will take place on Tuesday, June 10th from 6:30-8:30pm at 3049 Adeline St, Berkeley, CA 94703
 
-Cost: $36  
+Cost: $36
 If cost is a barrier to you attending, please reach out to flow@shefaflow.org, there are limited scholarships available ($18)
 This session will not be recorded.
 
@@ -204,53 +224,56 @@ About Our Guides:
 Lior Tsarfaty is an international touring musician, recording artist, and the musical director of “Chochmat Ha’Lev,” a Jewish renewal spiritual center. Lior has always viewed music as more than entertainment. For Lior, it’s also been a profound source of healing. So when he left his native Israel in 2009 to study in California, it was to deepen his understanding of music as a vehicle for transformation.
 As a student at the California Institute of Integral Studies, Lior enrolled in the Voice, Sound and Healing Music Program. He also explored the field of body-oriented psychotherapy, attending the Hakomi Institute of California. Lior broadened his scope by working with a wide range of spiritual organizations, teachers, and artists, including Patti Cathcart (Tuck and Patty), Roshi Norman Fisher, Joanna Macy, Starhawk, and Jennifer Berezan.
 
-Lior set about employing music as a tool for peacemaking and, in 2014, released his debut album “Lior Tsarfaty & The Prayer Songs Project,” which brought together Israeli, Moroccan, Indian, Canadian, and American musicians in perfect harmony. His second album, “I Am You,” is a collaboration between 35 Israeli and Palestinian musicians. His most recent album “In My Ancestors’ Arms” is a tribute to his Jewish heritage.
+Lior set about employing music as a tool for peacemaking and, in 2014, released his debut album “Lior Tsarfaty &amp; The Prayer Songs Project,” which brought together Israeli, Moroccan, Indian, Canadian, and American musicians in perfect harmony. His second album, “I Am You,” is a collaboration between 35 Israeli and Palestinian musicians. His most recent album “In My Ancestors’ Arms” is a tribute to his Jewish heritage.
 
-Over the years, Lior has used the healing power of music to make a difference for the homeless, children, hospice patients, and elders. Lior developed a unique and successful method of working musically with Alzheimer's patients. His groundbreaking work is featured in the film "There is a Place."
+Over the years, Lior has used the healing power of music to make a difference for the homeless, children, hospice patients, and elders. Lior developed a unique and successful method of working musically with Alzheimer&#x27;s patients. His groundbreaking work is featured in the film &quot;There is a Place.&quot;
 
-Rabbi Zac Kamenetz is a rabbi and community leader based in Berkeley, CA.  As the founder and CEO of Shefa, Zac is leading a movement to integrate safe and supported psychedelic use into the Jewish spiritual tradition, advocating for the healing of individual and inherited traumas, and inspiring a Jewish religious and creative renaissance in the 21st century. He is a qualified instructor of MBSR and is trained in psychedelic-assisted psychotherapeutic care through Inbodied Life and the Hakomi Institute of Northern California.
-</p></div><a href="https://www.shefaflow.org/programs/p/prayerandsong">Event Link</a></div>
+https://www.shefaflow.org/programs/p/prayerandsong-my8l7</div></details><div class="event-links"><a class="event-link" href="https://www.shefaflow.org/programs/p/prayerandsong-my8l7" rel="noopener noreferrer">Tickets &amp; information <span aria-hidden="true">↗</span></a></div></article><article class="event-card"><p class="event-date"><time datetime="2025-05-28T17:00:00-07:00">Wednesday, May 28, 2025</time></p><h3>Cannabis Author Showcase</h3><p class="event-time">5:00 PM – 9:00 PM</p><details class="event-details"><summary>Event details</summary><div class="description">Featuring: Ellen Holland, Jamie Evans, and Luke Scarmazzo.
 
-<div class="event_deets"><h3>Singing the Great Turning 3</h3>
-<p>Monday March 24 2025 6:00 PM until 9:00 PM</p>
-<button class="toggle-btn" onclick="toggleDescription(this)">Show Details</button>
-<div class="event_description"><p>Join us for this 9-week in-person singing journey around the spiral of Joanna Macy's "The Work That Reconnects" with Jess Serrante of 'We Are The Great Turning' Podcast and Lauren Arrow, Songtender + Music Leader.
+This event provides a platform that introduces readers to a diverse range of cannabis books and authors. We believe in supporting creativity and education, while fostering community within the cannabis space.
 
-In these times of division and distraction, it’s more important than ever that we come together in community and cultivate practices that build resilience in the face of despair. By weaving song and The Work That Reconnects, our aim is to help nourish community and help us remember the work we are here to do.
+https://cannabooks.splashthat.com/</div></details><div class="event-links"><a class="event-link" href="https://cannabooks.splashthat.com/" rel="noopener noreferrer">Tickets &amp; information <span aria-hidden="true">↗</span></a></div></article><article class="event-card"><p class="event-date"><time datetime="2025-05-18T11:00:00-07:00">Sunday, May 18, 2025</time></p><h3>Community Survival Program</h3><p class="event-time">11:00 AM – 2:00 PM</p><details class="event-details"><summary>Event details</summary><div class="description">Holistic Health Event: Providing access, services &amp; education to whole plant medicine. The holistic health initiative is a continuation of the iconic health legacy of preventative healthcare programs created by the original Black Panther Party.
 
-Each week we will use the foundations taught in the “We Are The Great Turning” podcast, which brings listeners to the kitchen table of legendary eco-spiritual teacher, and Berkeley local, Joanna Macy, interviewed by Jess Serrante. Each episode dives into what it takes to live with our hearts and integrity intact in this time of global crisis and helps us to explore abiding wisdom that can help us stay joyful and energized as we work toward a more just and life-sustaining world. ​</p></div><a href="https://www.processsing.com/greatturning">Event Link</a></div>
+This program promotes free, accessible, alternative healthcare, education &amp; positive lifestyle services.
 
-<div class="event_deets"><h3>Singing the Great Turning 4</h3>
-<p>Monday March 31 2025 6:00 PM until 9:00 PM</p>
-<button class="toggle-btn" onclick="toggleDescription(this)">Show Details</button>
-<div class="event_description"><p>Join us for this 9-week in-person singing journey around the spiral of Joanna Macy's "The Work That Reconnects" with Jess Serrante of 'We Are The Great Turning' Podcast and Lauren Arrow, Songtender + Music Leader.
+- Free Food
+- Community Orgs
+- Pharmacist Consultation
 
-In these times of division and distraction, it’s more important than ever that we come together in community and cultivate practices that build resilience in the face of despair. By weaving song and The Work That Reconnects, our aim is to help nourish community and help us remember the work we are here to do.
+Presented by the Black Panther Party Alumni Legacy Network with CBCB dispensary and Redwood Roots Distribution.</div></details><div class="event-links"></div></article><article class="event-card"><p class="event-date"><time datetime="2025-05-13T18:30:00-07:00">Tuesday, May 13, 2025</time></p><h3>Inner Peace Sound Bath</h3><p class="event-time">6:30 PM – 8:30 PM</p><details class="event-details"><summary>Event details</summary><div class="description">Join Blue Muse sound healing &amp; Luiza Leite for a blissful experience at the Chapel of Flowers in Berekely.
 
-Each week we will use the foundations taught in the “We Are The Great Turning” podcast, which brings listeners to the kitchen table of legendary eco-spiritual teacher, and Berkeley local, Joanna Macy, interviewed by Jess Serrante. Each episode dives into what it takes to live with our hearts and integrity intact in this time of global crisis and helps us to explore abiding wisdom that can help us stay joyful and energized as we work toward a more just and life-sustaining world. ​</p></div><a href="https://www.processsing.com/greatturning">Event Link</a></div>
+Immerse yourself in a soothing sound bath that will transport you to a state of deep relaxation and inner peace. Let the gentle vibrations of crystal singing bowls, gongs, Hand pan, &amp; other instruments wash away stress and tension. Allow your mind to unwind and your body to rejuvenate as the harmonious sounds envelop you.
 
-<div class="event_deets"><h3>Singing the Great Turning 5</h3>
-<p>Monday April 7 2025 6:00 PM until 9:00 PM</p>
-<button class="toggle-btn" onclick="toggleDescription(this)">Show Details</button>
-<div class="event_description"><p>Join us for this 9-week in-person singing journey around the spiral of Joanna Macy's "The Work That Reconnects" with Jess Serrante of 'We Are The Great Turning' Podcast and Lauren Arrow, Songtender + Music Leader.
+Unique experience to nurture your mind, body, and soul.
+Doors close &amp; Sound Bath starts at 6:30
+
+https://www.eventbrite.com/e/inner-peace-sound-bath-in-berkeley-tickets-1338122994899?aff=oddtdtcreator</div></details><div class="event-links"><a class="event-link" href="https://www.eventbrite.com/e/inner-peace-sound-bath-in-berkeley-tickets-1338122994899?aff=oddtdtcreator" rel="noopener noreferrer">Tickets &amp; information <span aria-hidden="true">↗</span></a></div></article><article class="event-card"><p class="event-date"><time datetime="2025-05-12T18:00:00-07:00">Monday, May 12, 2025</time></p><h3>Singing the Great Turning 9</h3><p class="event-time">6:00 PM – 9:00 PM</p><details class="event-details"><summary>Event details</summary><div class="description">Join us for this 9-week in-person singing journey around the spiral of Joanna Macy&#x27;s &quot;The Work That Reconnects&quot; with Jess Serrante of &#x27;We Are The Great Turning&#x27; Podcast and Lauren Arrow, Songtender + Music Leader.
 
 In these times of division and distraction, it’s more important than ever that we come together in community and cultivate practices that build resilience in the face of despair. By weaving song and The Work That Reconnects, our aim is to help nourish community and help us remember the work we are here to do.
 
-Each week we will use the foundations taught in the “We Are The Great Turning” podcast, which brings listeners to the kitchen table of legendary eco-spiritual teacher, and Berkeley local, Joanna Macy, interviewed by Jess Serrante. Each episode dives into what it takes to live with our hearts and integrity intact in this time of global crisis and helps us to explore abiding wisdom that can help us stay joyful and energized as we work toward a more just and life-sustaining world. ​</p></div><a href="https://www.processsing.com/greatturning">Event Link</a></div>
+Each week we will use the foundations taught in the “We Are The Great Turning” podcast, which brings listeners to the kitchen table of legendary eco-spiritual teacher, and Berkeley local, Joanna Macy, interviewed by Jess Serrante. Each episode dives into what it takes to live with our hearts and integrity intact in this time of global crisis and helps us to explore abiding wisdom that can help us stay joyful and energized as we work toward a more just and life-sustaining world. ​
 
-<div class="event_deets"><h3>Singing the Great Turning 6</h3>
-<p>Monday April 14 2025 6:00 PM until 9:00 PM</p>
-<button class="toggle-btn" onclick="toggleDescription(this)">Show Details</button>
-<div class="event_description"><p>Join us for this 9-week in-person singing journey around the spiral of Joanna Macy's "The Work That Reconnects" with Jess Serrante of 'We Are The Great Turning' Podcast and Lauren Arrow, Songtender + Music Leader.
+https://www.processsing.com/greatturning</div></details><div class="event-links"><a class="event-link" href="https://www.processsing.com/greatturning" rel="noopener noreferrer">Tickets &amp; information <span aria-hidden="true">↗</span></a></div></article><article class="event-card"><p class="event-date"><time datetime="2025-05-05T18:00:00-07:00">Monday, May 5, 2025</time></p><h3>Singing the Great Turning 8</h3><p class="event-time">6:00 PM – 9:00 PM</p><details class="event-details"><summary>Event details</summary><div class="description">Join us for this 9-week in-person singing journey around the spiral of Joanna Macy&#x27;s &quot;The Work That Reconnects&quot; with Jess Serrante of &#x27;We Are The Great Turning&#x27; Podcast and Lauren Arrow, Songtender + Music Leader.
 
 In these times of division and distraction, it’s more important than ever that we come together in community and cultivate practices that build resilience in the face of despair. By weaving song and The Work That Reconnects, our aim is to help nourish community and help us remember the work we are here to do.
 
-Each week we will use the foundations taught in the “We Are The Great Turning” podcast, which brings listeners to the kitchen table of legendary eco-spiritual teacher, and Berkeley local, Joanna Macy, interviewed by Jess Serrante. Each episode dives into what it takes to live with our hearts and integrity intact in this time of global crisis and helps us to explore abiding wisdom that can help us stay joyful and energized as we work toward a more just and life-sustaining world. ​</p></div><a href="https://www.processsing.com/greatturning">Event Link</a></div>
+Each week we will use the foundations taught in the “We Are The Great Turning” podcast, which brings listeners to the kitchen table of legendary eco-spiritual teacher, and Berkeley local, Joanna Macy, interviewed by Jess Serrante. Each episode dives into what it takes to live with our hearts and integrity intact in this time of global crisis and helps us to explore abiding wisdom that can help us stay joyful and energized as we work toward a more just and life-sustaining world. ​
 
-<div class="event_deets"><h3>Shefa Breathwork Ceremony</h3>
-<p>Tuesday April 15 2025 6:00 PM until 9:00 PM</p>
-<button class="toggle-btn" onclick="toggleDescription(this)">Show Details</button>
-<div class="event_description"><p>Join us for a breathwork experience rooted in Jewish wisdom and tradition, offering a space to explore expanded states of consciousness through breath.
+https://www.processsing.com/greatturning</div></details><div class="event-links"><a class="event-link" href="https://www.processsing.com/greatturning" rel="noopener noreferrer">Tickets &amp; information <span aria-hidden="true">↗</span></a></div></article><article class="event-card"><p class="event-date"><time datetime="2025-04-25T18:00:00-07:00">Friday, April 25, 2025</time></p><h3>Fantasy Waltz Night POSTPONED</h3><p class="event-time">6:00 PM – 9:00 PM</p><details class="event-details"><summary>Event details</summary><div class="description">From the folks who brought you the Renegade Orchestra, Death and Taxes Swing Band, and the San Francisco Yiddish Combo...
+
+Not Loud Concerts Presents…
+
+Fantasy Waltz Night at the historic Chapel of the Flowers in Berkley, April 25 From 7:00-8:30
+
+Take your carriage (or Bart) to a magical, historical dance space located in Berkeley for a night of waltzes presented by a live chamber orchestra.
+
+The evening begins at 7:00 with a short beginning waltz lesson presented by dance master Colin Williams, followed by the orchestra picking up their bows to present a selection of danceable waltzes. From the Viennese waltzes of Johann Strauss II, to the magical sounds of Disney, to the rollicking waltzes of the frontier, members of the Renegade Orchestra will get your feet moving in 3/4 time.
+
+Come in your ball gowns, fantasy attire or in casual garb, beginners and seasoned dancers are all welcome. The floor is wood, the space is magical and the music is of course, not too loud. Complimentary coffee and cookies will be available.
+
+Located at 3049 Adeline St, very close to the Ashby Bart station and with a private parking lot as well as street parking. 18 and up, children will not be admitted.
+
+3049 Adeline St. (this venue is new and may not appear on maps. Don’t go to Chapel of the Chimes, that is a funeral home.)</div></details><div class="event-links"></div></article><article class="event-card"><p class="event-date"><time datetime="2025-04-15T18:00:00-07:00">Tuesday, April 15, 2025</time></p><h3>Shefa Breathwork Ceremony</h3><p class="event-time">6:00 PM – 9:00 PM</p><details class="event-details"><summary>Event details</summary><div class="description">Join us for a breathwork experience rooted in Jewish wisdom and tradition, offering a space to explore expanded states of consciousness through breath.
 We will be practicing a simple yet powerful breathwork technique inspired by Holotropic Breathwork, infused with Jewish spiritual frameworks to help support the inner movement of the Passover season--from narrowness to expansion, from despair to joy. This practice has the potential to evoke altered or ecstatic states, similar to those described in Jewish mystical traditions.
 
 Our evening will begin with an introduction to the practice, exploring its connection to Jewish mysticism, sacred breath (neshima), and soul (neshama). We will review the breathwork process and what to expect. We will set intentions and ground into Jewish sacred time.
@@ -266,19 +289,19 @@ This session will not be recorded.
 
 About Our Guide:
 
-Hagit Cohen is an Israeli-born artist and breathwork facilitator based in  Berkeley, California. In addition to her visual art career, Hagit integrates her  deep connection to nature and spirituality into her role as a cannabis /  breathwork facilitator and guide. Through CannabisJourneyWork, she guides  individuals and groups, supporting people in accessing altered states of  consciousness for healing and personal growth. In her practice she creates  sacred setting that can be deeply transformative; physically, emotionally, and  spiritually.  
-Hagit has been credentialed in psychedelic guiding and breathwork  facilitation by the Center for Medicinal Mindfulness and the Psychedelic  Sitter school in Boulder CO. Her training includes Advanced  transformational practices, Trauma resolution strategies, Cannabis-assisted  breathwork and Cannabis-Assisted Somatic Psychotherapy. Hagit had also  trained in Indigenous Shamanic Wisdom and Visioning, which masters the  organizing principles of shamanic ways of the Andean Tradition as well as  contemporary life. She holds an MFA in Imaging Arts from the Rochester  Institute of Technology.  
-Hagit is currently training with Relational Somatic Healing, a modality that  fully immerses the client in a healthy, authentic, real, loving relationship with  themselves and the world. 
+Hagit Cohen is an Israeli-born artist and breathwork facilitator based in  Berkeley, California. In addition to her visual art career, Hagit integrates her  deep connection to nature and spirituality into her role as a cannabis /  breathwork facilitator and guide. Through CannabisJourneyWork, she guides  individuals and groups, supporting people in accessing altered states of  consciousness for healing and personal growth. In her practice she creates  sacred setting that can be deeply transformative; physically, emotionally, and  spiritually.
+Hagit has been credentialed in psychedelic guiding and breathwork  facilitation by the Center for Medicinal Mindfulness and the Psychedelic  Sitter school in Boulder CO. Her training includes Advanced  transformational practices, Trauma resolution strategies, Cannabis-assisted  breathwork and Cannabis-Assisted Somatic Psychotherapy. Hagit had also  trained in Indigenous Shamanic Wisdom and Visioning, which masters the  organizing principles of shamanic ways of the Andean Tradition as well as  contemporary life. She holds an MFA in Imaging Arts from the Rochester  Institute of Technology.
+Hagit is currently training with Relational Somatic Healing, a modality that  fully immerses the client in a healthy, authentic, real, loving relationship with  themselves and the world.
 
-Important Safety Note: 
-You should NOT practice breathwork if any of the below apply. If you have any questions please reach out to flow@shefaflow.org. Every participant will need to sign a health questionnaire certifying that they understand this information. 
-Cardiovascular & Blood Conditions
+Important Safety Note:
+You should NOT practice breathwork if any of the below apply. If you have any questions please reach out to flow@shefaflow.org. Every participant will need to sign a health questionnaire certifying that they understand this information.
+Cardiovascular &amp; Blood Conditions
 High blood pressure not controlled with medication
 Cardiovascular disease and/or irregularities, including prior heart attack
 History of aneurysms (personal or more than one immediate family member)
 History of strokes, seizures, or TIAs
 Taking prescription blood thinners/anti-clotting medications (e.g., Coumadin)
-Neurological & Eye Conditions
+Neurological &amp; Eye Conditions
 Epilepsy
 Detached retina
 Glaucoma
@@ -295,380 +318,97 @@ Any other medical, psychiatric, or physical condition that could impair your abi
 Asthma
 You are welcome to practice breathwork, but must have your inhaler available
 If you are unsure whether any of these apply to you, please reach out to us before participating.
-</p></div><a href="https://www.shefaflow.org/programs/p/breathwork">Event Link</a></div>
 
-<div class="event_deets"><h3><s>Fantasy Waltz Night</s> POSTPONED</h3>
-<p>Friday April 25 2025 6:00 PM until 9:00 PM</p>
-<button class="toggle-btn" onclick="toggleDescription(this)">Show Details</button>
-<div class="event_description"><p>From the folks who brought you the Renegade Orchestra, Death and Taxes Swing Band, and the San Francisco Yiddish Combo...
-
-Not Loud Concerts Presents…
-
-Fantasy Waltz Night at the historic Chapel of the Flowers in Berkley, April 25 From 7:00-8:30
-
-Take your carriage (or Bart) to a magical, historical dance space located in Berkeley for a night of waltzes presented by a live chamber orchestra.
-
-The evening begins at 7:00 with a short beginning waltz lesson presented by dance master Colin Williams, followed by the orchestra picking up their bows to present a selection of danceable waltzes. From the Viennese waltzes of Johann Strauss II, to the magical sounds of Disney, to the rollicking waltzes of the frontier, members of the Renegade Orchestra will get your feet moving in 3/4 time.
-
-Come in your ball gowns, fantasy attire or in casual garb, beginners and seasoned dancers are all welcome. The floor is wood, the space is magical and the music is of course, not too loud. Complimentary coffee and cookies will be available.
-
-Located at 3049 Adeline St, very close to the Ashby Bart station and with a private parking lot as well as street parking. 18 and up, children will not be admitted.
-
-3049 Adeline St. (this venue is new and may not appear on maps. Don’t go to Chapel of the Chimes, that is a funeral home.)</p></div>
-
-</div>
-
-<div class="event_deets"><h3>Singing the Great Turning 8</h3>
-<p>Monday May 5 2025 6:00 PM until 9:00 PM</p>
-<button class="toggle-btn" onclick="toggleDescription(this)">Show Details</button>
-<div class="event_description"><p>Join us for this 9-week in-person singing journey around the spiral of Joanna Macy's "The Work That Reconnects" with Jess Serrante of 'We Are The Great Turning' Podcast and Lauren Arrow, Songtender + Music Leader.
+https://www.shefaflow.org/programs/p/breathwork</div></details><div class="event-links"><a class="event-link" href="https://www.shefaflow.org/programs/p/breathwork" rel="noopener noreferrer">Tickets &amp; information <span aria-hidden="true">↗</span></a></div></article><article class="event-card"><p class="event-date"><time datetime="2025-04-14T18:00:00-07:00">Monday, April 14, 2025</time></p><h3>Singing the Great Turning 6</h3><p class="event-time">6:00 PM – 9:00 PM</p><details class="event-details"><summary>Event details</summary><div class="description">Join us for this 9-week in-person singing journey around the spiral of Joanna Macy&#x27;s &quot;The Work That Reconnects&quot; with Jess Serrante of &#x27;We Are The Great Turning&#x27; Podcast and Lauren Arrow, Songtender + Music Leader.
 
 In these times of division and distraction, it’s more important than ever that we come together in community and cultivate practices that build resilience in the face of despair. By weaving song and The Work That Reconnects, our aim is to help nourish community and help us remember the work we are here to do.
 
-Each week we will use the foundations taught in the “We Are The Great Turning” podcast, which brings listeners to the kitchen table of legendary eco-spiritual teacher, and Berkeley local, Joanna Macy, interviewed by Jess Serrante. Each episode dives into what it takes to live with our hearts and integrity intact in this time of global crisis and helps us to explore abiding wisdom that can help us stay joyful and energized as we work toward a more just and life-sustaining world. ​</p></div><a href="https://www.processsing.com/greatturning">Event Link</a></div>
+Each week we will use the foundations taught in the “We Are The Great Turning” podcast, which brings listeners to the kitchen table of legendary eco-spiritual teacher, and Berkeley local, Joanna Macy, interviewed by Jess Serrante. Each episode dives into what it takes to live with our hearts and integrity intact in this time of global crisis and helps us to explore abiding wisdom that can help us stay joyful and energized as we work toward a more just and life-sustaining world. ​
 
-<div class="event_deets"><h3>Singing the Great Turning 9</h3>
-<p>Monday May 12 2025 6:00 PM until 9:00 PM</p>
-<button class="toggle-btn" onclick="toggleDescription(this)">Show Details</button>
-<div class="event_description"><p>Join us for this 9-week in-person singing journey around the spiral of Joanna Macy's "The Work That Reconnects" with Jess Serrante of 'We Are The Great Turning' Podcast and Lauren Arrow, Songtender + Music Leader.
+https://www.processsing.com/greatturning</div></details><div class="event-links"><a class="event-link" href="https://www.processsing.com/greatturning" rel="noopener noreferrer">Tickets &amp; information <span aria-hidden="true">↗</span></a></div></article><article class="event-card"><p class="event-date"><time datetime="2025-04-07T18:00:00-07:00">Monday, April 7, 2025</time></p><h3>Singing the Great Turning 5</h3><p class="event-time">6:00 PM – 9:00 PM</p><details class="event-details"><summary>Event details</summary><div class="description">Join us for this 9-week in-person singing journey around the spiral of Joanna Macy&#x27;s &quot;The Work That Reconnects&quot; with Jess Serrante of &#x27;We Are The Great Turning&#x27; Podcast and Lauren Arrow, Songtender + Music Leader.
 
 In these times of division and distraction, it’s more important than ever that we come together in community and cultivate practices that build resilience in the face of despair. By weaving song and The Work That Reconnects, our aim is to help nourish community and help us remember the work we are here to do.
 
-Each week we will use the foundations taught in the “We Are The Great Turning” podcast, which brings listeners to the kitchen table of legendary eco-spiritual teacher, and Berkeley local, Joanna Macy, interviewed by Jess Serrante. Each episode dives into what it takes to live with our hearts and integrity intact in this time of global crisis and helps us to explore abiding wisdom that can help us stay joyful and energized as we work toward a more just and life-sustaining world. ​</p></div><a href="https://www.processsing.com/greatturning">Event Link</a></div>
+Each week we will use the foundations taught in the “We Are The Great Turning” podcast, which brings listeners to the kitchen table of legendary eco-spiritual teacher, and Berkeley local, Joanna Macy, interviewed by Jess Serrante. Each episode dives into what it takes to live with our hearts and integrity intact in this time of global crisis and helps us to explore abiding wisdom that can help us stay joyful and energized as we work toward a more just and life-sustaining world. ​
 
-<div class="event_deets"><h3>Inner Peace Sound Bath</h3>
-<p>Tuesday May 13 2025 6:30 PM until 8:30 PM</p>
-<button class="toggle-btn" onclick="toggleDescription(this)">Show Details</button>
-<div class="event_description"><p>Join Blue Muse sound healing & Luiza Leite for a blissful experience at the Chapel of Flowers in Berekely.
+https://www.processsing.com/greatturning</div></details><div class="event-links"><a class="event-link" href="https://www.processsing.com/greatturning" rel="noopener noreferrer">Tickets &amp; information <span aria-hidden="true">↗</span></a></div></article><article class="event-card"><p class="event-date"><time datetime="2025-03-31T18:00:00-07:00">Monday, March 31, 2025</time></p><h3>Singing the Great Turning 4</h3><p class="event-time">6:00 PM – 9:00 PM</p><details class="event-details"><summary>Event details</summary><div class="description">Join us for this 9-week in-person singing journey around the spiral of Joanna Macy&#x27;s &quot;The Work That Reconnects&quot; with Jess Serrante of &#x27;We Are The Great Turning&#x27; Podcast and Lauren Arrow, Songtender + Music Leader.
 
+In these times of division and distraction, it’s more important than ever that we come together in community and cultivate practices that build resilience in the face of despair. By weaving song and The Work That Reconnects, our aim is to help nourish community and help us remember the work we are here to do.
 
-Immerse yourself in a soothing sound bath that will transport you to a state of deep relaxation and inner peace. Let the gentle vibrations of crystal singing bowls, gongs, Hand pan, & other instruments wash away stress and tension. Allow your mind to unwind and your body to rejuvenate as the harmonious sounds envelop you.
+Each week we will use the foundations taught in the “We Are The Great Turning” podcast, which brings listeners to the kitchen table of legendary eco-spiritual teacher, and Berkeley local, Joanna Macy, interviewed by Jess Serrante. Each episode dives into what it takes to live with our hearts and integrity intact in this time of global crisis and helps us to explore abiding wisdom that can help us stay joyful and energized as we work toward a more just and life-sustaining world. ​
 
+https://www.processsing.com/greatturning</div></details><div class="event-links"><a class="event-link" href="https://www.processsing.com/greatturning" rel="noopener noreferrer">Tickets &amp; information <span aria-hidden="true">↗</span></a></div></article><article class="event-card"><p class="event-date"><time datetime="2025-03-24T18:00:00-07:00">Monday, March 24, 2025</time></p><h3>Singing the Great Turning 3</h3><p class="event-time">6:00 PM – 9:00 PM</p><details class="event-details"><summary>Event details</summary><div class="description">Join us for this 9-week in-person singing journey around the spiral of Joanna Macy&#x27;s &quot;The Work That Reconnects&quot; with Jess Serrante of &#x27;We Are The Great Turning&#x27; Podcast and Lauren Arrow, Songtender + Music Leader.
 
-Unique experience to nurture your mind, body, and soul.
-Doors close & Sound Bath starts at 6:30</p></div><a href="https://www.eventbrite.com/e/inner-peace-sound-bath-in-berkeley-tickets-1338122994899?aff=oddtdtcreator">Event Link</a></div>
+In these times of division and distraction, it’s more important than ever that we come together in community and cultivate practices that build resilience in the face of despair. By weaving song and The Work That Reconnects, our aim is to help nourish community and help us remember the work we are here to do.
 
-<div class="event_deets"><h3>Community Survival Program</h3>
-<p>Sunday May 18 2025 11:00 AM until 2:00 PM</p>
-<button class="toggle-btn" onclick="toggleDescription(this)">Show Details</button>
-<div class="event_description"><p>Holistic Health Event: Providing access, services & education to whole plant medicine. The holistic health initiative is a continuation of the iconic health legacy of preventative healthcare programs created by the original Black Panther Party. 
+Each week we will use the foundations taught in the “We Are The Great Turning” podcast, which brings listeners to the kitchen table of legendary eco-spiritual teacher, and Berkeley local, Joanna Macy, interviewed by Jess Serrante. Each episode dives into what it takes to live with our hearts and integrity intact in this time of global crisis and helps us to explore abiding wisdom that can help us stay joyful and energized as we work toward a more just and life-sustaining world. ​
 
-This program promotes free, accessible, alternative healthcare, education & positive lifestyle services.
+https://www.processsing.com/greatturning</div></details><div class="event-links"><a class="event-link" href="https://www.processsing.com/greatturning" rel="noopener noreferrer">Tickets &amp; information <span aria-hidden="true">↗</span></a></div></article><article class="event-card"><p class="event-date"><time datetime="2025-03-18T18:00:00-07:00">Tuesday, March 18, 2025</time></p><h3>Shefa Prayer and Song Circle</h3><p class="event-time">6:00 PM – 9:00 PM</p><details class="event-details"><summary>Event details</summary><div class="description">Join us for an evening of prayer, song, and connection, as we come together in Jewish psychedelic community. Guided by Lior Tsarfaty and Rabbi Zac Kamenetz, we will weave our voices throughtraditional niggunim (wordless melodies), songs, and medicine music. This gathering invites deep connection—to ourselves, to one another, and to the Divine.
+This is an opportunity to hold each other in sacred space, to find renewal through melody and intention, and to catalyze communal connection in a time of great need.
+
+This gathering is rooted in Jewish tradition and welcomes everyone with an open heart.
+The Circle will take place on Tuesday, March 18th from 6:30-8:30pm at 3049 Adeline St, Berkeley, CA 94703
+
+Cost: $36
+If cost is a barrier to you attending, please reach out to flow@shefaflow.org, there are limited scholarships available ($18)
+This session will not be recorded.
+
+About Our Guides:
+
+Lior Tsarfaty is an international touring musician, recording artist, and the musical director of “Chochmat Ha’Lev,” a Jewish renewal spiritual center. Lior has always viewed music as more than entertainment. For Lior, it’s also been a profound source of healing. So when he left his native Israel in 2009 to study in California, it was to deepen his understanding of music as a vehicle for transformation.
+As a student at the California Institute of Integral Studies, Lior enrolled in the Voice, Sound and Healing Music Program. He also explored the field of body-oriented psychotherapy, attending the Hakomi Institute of California. Lior broadened his scope by working with a wide range of spiritual organizations, teachers, and artists, including Patti Cathcart (Tuck and Patty), Roshi Norman Fisher, Joanna Macy, Starhawk, and Jennifer Berezan.
+
+Lior set about employing music as a tool for peacemaking and, in 2014, released his debut album “Lior Tsarfaty &amp; The Prayer Songs Project,” which brought together Israeli, Moroccan, Indian, Canadian, and American musicians in perfect harmony. His second album, “I Am You,” is a collaboration between 35 Israeli and Palestinian musicians. His most recent album “In My Ancestors’ Arms” is a tribute to his Jewish heritage.
+
+Over the years, Lior has used the healing power of music to make a difference for the homeless, children, hospice patients, and elders. Lior developed a unique and successful method of working musically with Alzheimer&#x27;s patients. His groundbreaking work is featured in the film &quot;There is a Place.&quot;
+
+Rabbi Zac Kamenetz is a rabbi and community leader based in Berkeley, CA.  As the founder and CEO of Shefa, Zac is leading a movement to integrate safe and supported psychedelic use into the Jewish spiritual tradition, advocating for the healing of individual and inherited traumas, and inspiring a Jewish religious and creative renaissance in the 21st century. He is a qualified instructor of MBSR and is trained in psychedelic-assisted psychotherapeutic care through Inbodied Life and the Hakomi Institute of Northern California.
+
+https://www.shefaflow.org/programs/p/prayerandsong</div></details><div class="event-links"><a class="event-link" href="https://www.shefaflow.org/programs/p/prayerandsong" rel="noopener noreferrer">Tickets &amp; information <span aria-hidden="true">↗</span></a></div></article><article class="event-card"><p class="event-date"><time datetime="2025-03-16T11:00:00-07:00">Sunday, March 16, 2025</time></p><h3>Community Survival Program</h3><p class="event-time">11:00 AM – 2:00 PM</p><details class="event-details"><summary>Event details</summary><div class="description">Holistic Health Event: Providing access, services &amp; education to whole plant medicine. The holistic health initiative is a continuation of the iconic health legacy of preventative healthcare programs created by the original Black Panther Party.
+
+This program promotes free, accessible, alternative healthcare, education &amp; positive lifestyle services.
 
 - Free Food
 - Community Orgs
 - Pharmacist Consultation
 
-Presented by the Black Panther Party Alumni Legacy Network with CBCB dispensary and Redwood Roots Distribution.</p></div>
+Presented by the Black Panther Party Alumni Legacy Network with CBCB dispensary and Redwood Roots Distribution.</div></details><div class="event-links"></div></article><article class="event-card"><p class="event-date"><time datetime="2025-03-10T18:00:00-07:00">Monday, March 10, 2025</time></p><h3>Singing the Great Turning 2</h3><p class="event-time">6:00 PM – 9:00 PM</p><details class="event-details"><summary>Event details</summary><div class="description">Join us for this 9-week in-person singing journey around the spiral of Joanna Macy&#x27;s &quot;The Work That Reconnects&quot; with Jess Serrante of &#x27;We Are The Great Turning&#x27; Podcast and Lauren Arrow, Songtender + Music Leader.
 
-</div>
+In these times of division and distraction, it’s more important than ever that we come together in community and cultivate practices that build resilience in the face of despair. By weaving song and The Work That Reconnects, our aim is to help nourish community and help us remember the work we are here to do.
 
-<div class="event_deets"><h3>Cannabis Author Showcase</h3>
-<p>Wednesday May 28 2025 5:00 PM until 9:00 PM</p>
-<button class="toggle-btn" onclick="toggleDescription(this)">Show Details</button>
-<div class="event_description"><p>Featuring: Ellen Holland, Jamie Evans, and Luke Scarmazzo.</p>
+Each week we will use the foundations taught in the “We Are The Great Turning” podcast, which brings listeners to the kitchen table of legendary eco-spiritual teacher, and Berkeley local, Joanna Macy, interviewed by Jess Serrante. Each episode dives into what it takes to live with our hearts and integrity intact in this time of global crisis and helps us to explore abiding wisdom that can help us stay joyful and energized as we work toward a more just and life-sustaining world. ​
 
-<p>This event provides a platform that introduces readers to a diverse range of cannabis books and authors. We believe in supporting creativity and education, while fostering community within the cannabis space. </p></div><a href="https://cannabooks.splashthat.com/">Event Link</a></div>
+https://www.processsing.com/greatturning</div></details><div class="event-links"><a class="event-link" href="https://www.processsing.com/greatturning" rel="noopener noreferrer">Tickets &amp; information <span aria-hidden="true">↗</span></a></div></article><article class="event-card"><p class="event-date"><time datetime="2025-03-03T18:00:00-08:00">Monday, March 3, 2025</time></p><h3>Singing the Great Turning 1</h3><p class="event-time">6:00 PM – 9:00 PM</p><details class="event-details"><summary>Event details</summary><div class="description">Join us for this 9-week in-person singing journey around the spiral of Joanna Macy&#x27;s &quot;The Work That Reconnects&quot; with Jess Serrante of &#x27;We Are The Great Turning&#x27; Podcast and Lauren Arrow, Songtender + Music Leader.
 
-<div class="event_deets"><h3>Shefa Prayer and Song Circle</h3>
-<p>Tuesday June 10 2025 6:00 PM until 9:00 PM</p>
-<button class="toggle-btn" onclick="toggleDescription(this)">Show Details</button>
-<div class="event_description"><p>Join us for an evening of prayer, song, and connection, as we come together in Jewish psychedelic community. Guided by Lior Tsarfaty, we’ll explore a range of Jewish vocal activation techniques including chant, medicine music, niggunim, and more. this gathering invites deep connection to ourselves, to one another, and to the Divine. </p>
+In these times of division and distraction, it’s more important than ever that we come together in community and cultivate practices that build resilience in the face of despair. By weaving song and The Work That Reconnects, our aim is to help nourish community and help us remember the work we are here to do.
 
-<p>This is an opportunity to hold each other in sacred space, to find renewal through melody and intention, and to catalyze communal connection in a time of great need.</p>
+Each week we will use the foundations taught in the “We Are The Great Turning” podcast, which brings listeners to the kitchen table of legendary eco-spiritual teacher, and Berkeley local, Joanna Macy, interviewed by Jess Serrante. Each episode dives into what it takes to live with our hearts and integrity intact in this time of global crisis and helps us to explore abiding wisdom that can help us stay joyful and energized as we work toward a more just and life-sustaining world. ​
 
-<p>This gathering is rooted in Jewish tradition and welcomes everyone with an open heart.
-The Circle will take place on Tuesday, June 10th from 6:30-8:30pm at 3049 Adeline St, Berkeley, CA 94703</p>
+https://www.processsing.com/greatturning</div></details><div class="event-links"><a class="event-link" href="https://www.processsing.com/greatturning" rel="noopener noreferrer">Tickets &amp; information <span aria-hidden="true">↗</span></a></div></article><article class="event-card"><p class="event-date"><time datetime="2025-02-22T19:00:00-08:00">Saturday, February 22, 2025</time></p><h3>Laugh Your Ash Off</h3><p class="event-time">7:00 PM – 9:00 PM</p><details class="event-details"><summary>Event details</summary><div class="description">Laugh Your Ash Off at this inaugural comedy show at the Ashby Social Club. Featuring host Ngaio Bealum, plus comedians Danielle Arce, Aivy Cordova, Alvin Duke Reid, and Victor Pacheco.
 
-<p>Cost: $36  
-If cost is a barrier to you attending, please reach out to flow@shefaflow.org, there are limited scholarships available ($18)
-This session will not be recorded.</p>
+This is part of the Ashby Social Club series of learning experiences featuring comedy, music, and education. Proceeds from the sale of these tickets go to benefit local community programs.
 
-<p>About Our Guides:</p>
+Hosted in a historic landmark venue in Berkeley, California: the Chapel of the Flowers.
 
-<p>Lior Tsarfaty is an international touring musician, recording artist, and the musical director of “Chochmat Ha’Lev,” a Jewish renewal spiritual center. Lior has always viewed music as more than entertainment. For Lior, it’s also been a profound source of healing. So when he left his native Israel in 2009 to study in California, it was to deepen his understanding of music as a vehicle for transformation.
-As a student at the California Institute of Integral Studies, Lior enrolled in the Voice, Sound and Healing Music Program. He also explored the field of body-oriented psychotherapy, attending the Hakomi Institute of California. Lior broadened his scope by working with a wide range of spiritual organizations, teachers, and artists, including Patti Cathcart (Tuck and Patty), Roshi Norman Fisher, Joanna Macy, Starhawk, and Jennifer Berezan.</p>
+https://bud.com/buy-online/laugh-your-ash-off-february-2025-ticket/</div></details><div class="event-links"><a class="event-link" href="https://bud.com/buy-online/laugh-your-ash-off-february-2025-ticket/" rel="noopener noreferrer">Tickets &amp; information <span aria-hidden="true">↗</span></a></div></article><article class="event-card"><p class="event-date"><time datetime="2025-02-16T11:00:00-08:00">Sunday, February 16, 2025</time></p><h3>Community Survival Program</h3><p class="event-time">11:00 AM – 2:00 PM</p><details class="event-details"><summary>Event details</summary><div class="description">Holistic Health Event: Providing access, services &amp; education to whole plant medicine. The holistic health initiative is a continuation of the iconic health legacy of preventative healthcare programs created by the original Black Panther Party.
 
-<p>Lior set about employing music as a tool for peacemaking and, in 2014, released his debut album “Lior Tsarfaty & The Prayer Songs Project,” which brought together Israeli, Moroccan, Indian, Canadian, and American musicians in perfect harmony. His second album, “I Am You,” is a collaboration between 35 Israeli and Palestinian musicians. His most recent album “In My Ancestors’ Arms” is a tribute to his Jewish heritage.</p>
+This program promotes free, accessible, alternative healthcare, education &amp; positive lifestyle services.
 
-<p>Over the years, Lior has used the healing power of music to make a difference for the homeless, children, hospice patients, and elders. Lior developed a unique and successful method of working musically with Alzheimer's patients. His groundbreaking work is featured in the film "There is a Place."
-</p></div><a href="https://www.shefaflow.org/programs/p/prayerandsong-my8l7">Event Link</a></div>
-
-<div class="event_deets"><h3>Community Survival Program</h3>
-<p>Sunday June 15 2025 11:00 AM until 1:30 PM</p>
-<button class="toggle-btn" onclick="toggleDescription(this)">Show Details</button>
-<div class="event_description"><p>Holistic Health Event: Providing access, services & education to whole plant medicine. The holistic health initiative is a continuation of the iconic health legacy of preventative healthcare programs created by the original Black Panther Party. </p>
-
-<p>This program promotes free, accessible, alternative healthcare, education & positive lifestyle services.</p>
-
-<p>- Free Food
+- Free Food
 - Community Orgs
-- Pharmacist Consultation</p>
+- Pharmacist Consultation
 
-<p>Presented by the Black Panther Party Alumni Legacy Network with CBCB dispensary and Redwood Roots Distribution.</p></div></div>
+Presented by the Black Panther Party Alumni Legacy Network with CBCB dispensary and Redwood Roots Distribution.</div></details><div class="event-links"></div></article><article class="event-card"><p class="event-date"><time datetime="2025-01-19T11:00:00-08:00">Sunday, January 19, 2025</time></p><h3>Community Survival Program</h3><p class="event-time">11:00 AM – 2:00 PM</p><details class="event-details"><summary>Event details</summary><div class="description">Holistic Health Event: Providing access, services &amp; education to whole plant medicine. The holistic health initiative is a continuation of the iconic health legacy of preventative healthcare programs created by the original Black Panther Party.
 
-<div class="event_deets"><h3>AI Hope vs Doom: A Blue Heart Debate and Social</h3>
-<p>Tuesday July 22 2025 6:00 PM until 9:00 PM</p>
-<button class="toggle-btn" onclick="toggleDescription(this)">Show Details</button>
-<div class="event_description"><p>Confused about the future of AI and accelerating technology? Wondering what to believe and how you can show up and find community in this strange time?
-You're invited to an evening that blends fun, snacks, and serious questions about our future, with themed drinks and thoughtful company.</p>
+This program promotes free, accessible, alternative healthcare, education &amp; positive lifestyle services.
 
-<p>​What to Expect:</p>
-
-<p>​🌀 Debate: “AI Hope vs Doom: Which future is more likely?”
-At 6:40, we’ll host a playful but real debate between Team Hope and Team Doom — framed around the future, tech, and justice. Audience participation encouraged (and rewarded)!</p>
-
-<p>​💬 Processing Circles + Real Action
-We’ll close with small group reflection and a concrete invitation to move your money, time, and power toward justice through Blue Heart.</p>
-
-<p>​💙 This event is part social, part salon, part soft call to action. Whether you're deep in the giving game or new to these convos, this is a low-pressure space to reflect and connect.</p>
-
-<p>​🎭 A dress code invitation: match your outfit to your outlook! Wear brighter colors or sparkling accents if you’re feeling optimistic about our future, and darker tones if not.</p>
-
-<p>​Themed drinks & snacks provided (mocktails, fruit & cheese platter)</p>
-
-<p>​Why Now?</p>
-
-<p>​Things are weird. AI is moving fast, the world feels chaotic, it's harder to tell what's actually real, and the future is uncertain. But we can still do things that matter. This evening is about making space for that conversation — and building community around action.</p>
-
-<p>​Spots are limited — please reserve yours by July 15. Come curious, leave inspired.</p>
-
-<p>​Hosted by: Eva & Stacey
-In collaboration with Blue Heart 💙
-Learn more here: <a href="https://www.blueheartaction.org/">Blue Heart</a></p></div><a href="https://lu.ma/zwzjugh8">Event Link</a></div><div class="event_deets"><h3>Community Survival Program</h3>
-<p>Sunday July 20 2025 11:00 AM until 1:30 PM</p>
-<button class="toggle-btn" onclick="toggleDescription(this)">Show Details</button>
-<div class="event_description"><p>Holistic Health Event: Providing access, services & education to whole plant medicine. The holistic health initiative is a continuation of the iconic health legacy of preventative healthcare programs created by the original Black Panther Party. </p>
-
-<p>This program promotes free, accessible, alternative healthcare, education & positive lifestyle services.</p>
-
-<p>- Free Food
+- Free Food
 - Community Orgs
-- Pharmacist Consultation</p>
-
-<p>Presented by the Black Panther Party Alumni Legacy Network with CBCB dispensary and Redwood Roots Distribution.</p></div></div>
-
-<div class="event_deets"><h3>Council of All Beings: A Community Ritual</h3>
-<p>Wednesday August 20 2025 6:00 PM until 9:00 PM</p>
-<button class="toggle-btn" onclick="toggleDescription(this)">Show Details</button>
-<div class="event_description"><p>In these times of unraveling and global crisis, many of us are searching for insight that can help us live, act, heal, and protect what we love. The Council of All Beings is a ritual developed by Joanna Macy and John Seed that helps us tap into the wild wisdom of the more-than-human world and remember that we ourselves are nature—part of a vibrant web of life rich with wisdom.</p></div><a href="https://partiful.com/e/52RIJkzpwE4tz60tDsyH">Event Link</a></div>
-
-<div class="event_deets"><h3>Community Survival Program</h3>
-<p>Sunday August 17 2025 11:00 AM until 1:30 PM</p>
-<button class="toggle-btn" onclick="toggleDescription(this)">Show Details</button>
-<div class="event_description"><p>Holistic Health Event: Providing access, services & education to whole plant medicine. The holistic health initiative is a continuation of the iconic health legacy of preventative healthcare programs created by the original Black Panther Party. </p>
-
-<p>This program promotes free, accessible, alternative healthcare, education & positive lifestyle services.</p>
-
-<p>- Free Food
-- Community Orgs
-- Pharmacist Consultation</p>
-
-<p>Presented by the Black Panther Party Alumni Legacy Network with CBCB dispensary and Redwood Roots Distribution.</p></div></div>
-  
-<div class="event_deets"><h3>Inner Peace Sound Bath September</h3>
-<p>Tuesday September 16 2025 7:00 PM until 9:00 PM</p>
-<button class="toggle-btn" onclick="toggleDescription(this)">Show Details</button>
-<div class="event_description"><p>Join Blue Muse sound healing & Luiza Leite for a blissfulsound bath experience at the Chapel of Flowers in Berkeley, former marmot castle. Easily accessible it’s across the street from Ashby Bart and there’s free parking.</p>
-
-<p>Immerse yourself in a soothing sound bath that will transport you to a state of deep relaxation and inner peace. Let the gentle vibrations of crystal singing bowls, gongs, Handpan & other instruments wash away stress and tension. Allow your mind to unwind and your body to rejuvenate as the harmonious sounds envelop you.</p>
-
-<p>A powerful experience to nurture your mind, body, and soul. Doors open at 6:30 & Sound Bath starts promptly 7pm, no late arrivals admitted. Bring a water bottle, a yoga mat and whatever you need to be comfortable and drop into a relaxed state. Looking forward to serenading you!</p></div>
-
-<a href="https://www.eventbrite.com/e/inner-peace-sound-bath-at-the-chapel-of-the-flowers-in-berkeley-tickets-1564530445679?aff=oddtdtcreator">Event Link</a> | <a href="https://www.facebook.com/events/777002088070007/">Facebook link</a></div>
-
-<div class="event_deets"><h3>Community Survival Program September</h3>
-<p>Sunday September 21 2025 11:00 AM until 1:30 PM</p>
-<button class="toggle-btn" onclick="toggleDescription(this)">Show Details</button>
-<div class="event_description"><p>Holistic Health Event: Providing access, services & education to whole plant medicine. The holistic health initiative is a continuation of the iconic health legacy of preventative healthcare programs created by the original Black Panther Party. </p>
-
-<p>This program promotes free, accessible, alternative healthcare, education & positive lifestyle services.</p>
-
-<p>- Free Food
-- Community Orgs
-- Pharmacist Consultation</p>
-
-<p>Presented by the Black Panther Party Alumni Legacy Network with CBCB dispensary and Redwood Roots Distribution.</p></div></div>
-
-<div class="event_deets"><h3>Inner Peace Sound Bath October</h3>
-<p>Tuesday October 7 2025 7:00 PM until 9:00 PM</p>
-<button class="toggle-btn" onclick="toggleDescription(this)">Show Details</button>
-<div class="event_description"><p>Join Blue Muse sound healing & Luiza Leite for a blissfulsound bath experience at the Chapel of Flowers in Berkeley, former marmot castle. Easily accessible it’s across the street from Ashby Bart and there’s free parking.</p>
-
-<p>Immerse yourself in a soothing sound bath that will transport you to a state of deep relaxation and inner peace. Let the gentle vibrations of crystal singing bowls, gongs, Handpan & other instruments wash away stress and tension. Allow your mind to unwind and your body to rejuvenate as the harmonious sounds envelop you.</p>
-
-<p>A powerful experience to nurture your mind, body, and soul. Doors open at 6:30 & Sound Bath starts promptly 7pm, no late arrivals admitted. Bring a water bottle, a yoga mat and whatever you need to be comfortable and drop into a relaxed state. Looking forward to serenading you!</p></div><a href="https://www.eventbrite.com/e/inner-peace-sound-bath-at-the-chapel-of-the-flowers-in-berkeley-tickets-1564530445679?aff=oddtdtcreator">Event Link</a></div>
-
-<div class="event_deets"><h3>Record Release: SONGS WE NO LONGER SING by phipps pt.</h3>
-<p>Wednesday October 8 2025 7:00 PM until 10:00 PM</p>
-<button class="toggle-btn" onclick="toggleDescription(this)">Show Details</button>
-<div class="event_description"><p>Record Release Party for Songs We No Longer Sing. Here's a writeup by Matt Sussman:</p>
-
-<p>Phipps Pt.'s second studio album – is a stunning song cycle which moves across vignettes of consumption, lust, grief, and what it takes to push through life at a moment when so many forces are marshaled against living.</p>
-
-<p>Sharrock’s gossamer vocals and delicately finger-picked guitar patterns find their complement in Leidecker’s equally sensitive approach to processing both, so that input frequently becomes indistinguishable from output. The album’s electronic glitches, buzzes, whirrs, and drones burnish rather than obscure Sharrock’s plaintive melodies and imagistic lyrics. Like practiced quilters, Phipps Pt. tenderly work their sonic material into a final composition whose design, no matter how abstract, never erases the traces of the human hands behind it.</p>
-
-<p>Sharrock often says at the start of a performance that Phipps Pt. is, “an idea and a place that we are going to together.” As with René Daumal’s Mount Analogue, Phipps Pt. is not a terminus but an occasion for the journey. Full of strange beauty and unexpected emotional candor, Songs We No Longer Sing issues a similarly generous invitation but with the added luxury that the listener is now able to partake of many return visits.</p></div><a href="https://phippspt.bandcamp.com/album/songs-we-no-longer-sing">Event Link</a></div>
-
-<div class="event_deets"><h3>Community Survival Program October</h3>
-<p>Sunday October 19 2025 11:00 AM until 1:30 PM</p>
-<button class="toggle-btn" onclick="toggleDescription(this)">Show Details</button>
-<div class="event_description"><p>Holistic Health Event: Providing access, services & education to whole plant medicine. The holistic health initiative is a continuation of the iconic health legacy of preventative healthcare programs created by the original Black Panther Party. </p>
-
-<p>This program promotes free, accessible, alternative healthcare, education & positive lifestyle services.</p>
-
-<p>- Free Food
-- Community Orgs
-- Pharmacist Consultation</p>
-
-<p>Presented by the Black Panther Party Alumni Legacy Network with CBCB dispensary and Redwood Roots Distribution.</p></div></div>
-
-<div class="event_deets"><h3>Community Survival Program October</h3>
-<p>Sunday October 19 2025 11:00 AM until Sunday October 19 2025 1:30 PM</p>
-<button class="toggle-btn" onclick="toggleDescription(this)">Show Details</button>
-<div class="event_description"><p>Holistic Health Event: Providing access, services & education to whole plant medicine. The holistic health initiative is a continuation of the iconic health legacy of preventative healthcare programs created by the original Black Panther Party. </p>
-
-<p>This program promotes free, accessible, alternative healthcare, education & positive lifestyle services.</p>
-
-<p>- Free Food
-- Community Orgs
-- Pharmacist Consultation</p>
-
-<p>Presented by the Black Panther Party Alumni Legacy Network with CBCB dispensary and Redwood Roots Distribution.</p></div></div>
-
-<div class="event_deets"><h3>Full Body Sensory Music Journey w/ Zendo Stereo + Crescendo</h3>
-<p>Friday October 24 2025 7:00 PM until Sunday October 26 2025 9:00 PM</p>
-<button class="toggle-btn" onclick="toggleDescription(this)">Show Details</button>
-<div class="event_description"><p>3 Shows | October 24, 25 and 26 | 7-9 PM
-Join us for an immersive, full-body listening experience that invites you to slow down, tune in, and journey inward through music and vibration.
-This guided journey is a unique collaboration, combining Zendo Stereo methodology with Crescendo Research’s groundbreaking tactile audio technology for a collective journey through music.</p>
-
-<p>Experience the music through a Crescendo tactile floor, a room-sized somatic speaker that envelops your whole body with vibration and let music transport you beyond your imagination. Feel the deep resonance of the music through your body, not just your ears, enhancing the emotional impact of every note. You’ll be guided through Zendo Stereo, a deep listening ritual that blends thoughtfully curated music with simple yet powerful practices designed to down-regulate the nervous system, open space for inner reflection, and reconnect you with your deeper self.</p>
-
-<p>What to expect: A deep listening ritual pairing thoughtfully curated music through headphones with somatic practices designed to down-regulate the nervous system, open the heart, and awaken deeper reflection and connection.</p></div><a href="https://www.eventbrite.com/e/full-body-sensory-music-journey-w-zendo-stereo-crescendo-tickets-1778238963609?aff=oddtdtcreator&utm_source=eventbrite&utm_medium=email&utm_campaign=post_publish&utm_content=shortLinkNewEmail">Event Link</a></div>
-
-<div class="event_deets"><h3>Curse Removal Pop-Up</h3>
-<p>Friday October 31 2025 7:30 PM until Friday October 31 2025 11:00 PM</p>
-<button class="toggle-btn" onclick="toggleDescription(this)">Show Details</button>
-<div class="event_description"><p>Get ready for a Halloween like no other 🔮</p>
-
-<p>A fusion of community celebration, healing and hex removal. Our goal is to create a positive immersive experience where people can connect and get elevated.</p>
-
-<p>Tickets are all inclusive ✨
--Eats by Big Bad Wolf SF!
--Tarot, Reiki, Soul Records, Energy Healing
--Massage w/ Blue Sage
--Astrology & Terps w/ Sol Spirit & Humboldt Nation
--Herbal Potion Making w/ Lady Gemini
--Blind Sensory w/ Ay Papi & Moon Made Farms
--Herbal Tea Service w/ Mind Palace Herbs
--Flavor discovery w/ Dr Dabber</p></div><a href="https://partiful.com/e/1C1aujik9P0Hq35hdHCa">Event Link</a></div>
-
-<div class="event_deets"><h3>Snacks Attack! A Halloween Hangover Burlesque</h3>
-<p>Saturday November 1 2025 5:00 PM until 10:00 PM</p>
-<button class="toggle-btn" onclick="toggleDescription(this)">Show Details</button>
-<div class="event_description"><p>Punani Productions Presents:</p>
-
-<p>SNACKS ATTACK!
-A Halloween-Hangover Burlesque Show
-🍕🥨🌯🧁🍿🥜🍩🍔🍪🍌🥓🍨🍭 </p>
-
-<p>Doors at 7:30 pm
-Show at 8 pm
-Dance party to follow! </p>
-
-<p>Tickets available at the door: $15-25 sliding scale (cash or Venmo accepted)</p>
-
-<p>Hosted by Liza Punani</p>
-
-<p>More details coming soon…</p></div><a href="https://partiful.com/e/A9f11VXcJ4iji1CMjvM2">Event Link</a></div>
-
-<div class="event_deets"><h3>Blue Heart's Fall Fundraiser Celebration</h3>
-<p>Sunday November 2 2025 3:00 PM until 6:00 PM</p>
-<button class="toggle-btn" onclick="toggleDescription(this)">Show Details</button>
-<div class="event_description"><p>Whether you've been a Blue Heart member for years, are a community partner who's received support from Blue Heart in the past, or are curious to get to know the organization, our Fall Fundraiser Celebration will have something for everyone.</p>
-
-<p>Join us to hear from a panel of passionate Bay Area community organizations doing inspiring work, visit organizations at their fun tables, build community with likeminded Bay Area residents, and support Blue Heart to walk into another successful year.</p>
-
-<p>Snacks and drinks provided. Kids play area will be offered with light supervision.</p>
-
-<p>Reach out if you are able to support with donating raffle items, food, drinks, or something else you'd like to contribute: eva@blueheartaction.org</p>
-
-<p></p></div><a href="https://www.eventbrite.com/e/blue-hearts-fall-fundraiser-celebration-tickets-1641091772669?aff=oddtdtcreator">Event Link</a></div>
-
-<div class="event_deets"><h3>Love Never Faileth: A night of musical merriment</h3>
-<p>Friday November 7 2025 7:00 PM until Friday November 7 2025 10:00 PM</p>
-<button class="toggle-btn" onclick="toggleDescription(this)">Show Details</button>
-<div class="event_description"><p>We cordially invite you into a night of ethereal sounds and fantastical fairy frolicking in Berkeley’s Chapel of Flowers.</p>
-
-<p>✨Fairytale/fantasy attire is highly encouraged✨</p>
-
-<p>Featuring the sonic wonders of:</p>
-
-<p>Waterstrider
-Animal Prince
-Child of the Mountain</p>
-
-<p>There will also be a tea lounge, as well as other donation-based beverages available for your pleasure.</p>
-
-<p>$20 advance/$25 day-of</p>
-
-<p>7pm doors, music to follow shortly after</p>
-
-<p>*Animal Prince and Waterstrider will be debuting a new collaborative song (releasing the same day!)*</p></div><a href="https://partiful.com/e/MXUSRBBeeflfyE9eED0g?">Event Link</a></div>
-
-<div class="event_deets"><h3>Memorial for Richard Lee</h3>
-<p>Sunday November 9 2025 12:00 PM until 10:00 PM</p>
-<button class="toggle-btn" onclick="toggleDescription(this)">Show Details</button>
-<div class="event_description"><p>Cannabis activist, pioneer, advocate for human rights. Helped educate many. Specific time and details to follow.</p></div></div>
-
-<div class="event_deets"><h3>Inner Peace Sound Bath November</h3>
-<p>Tuesday November 11 2025 7:00 PM until 9:00 PM</p>
-<button class="toggle-btn" onclick="toggleDescription(this)">Show Details</button>
-<div class="event_description"><p>Join Blue Muse sound healing & Luiza Leite for a blissfulsound bath experience at the Chapel of Flowers in Berkeley, former marmot castle. Easily accessible it’s across the street from Ashby Bart and there’s free parking.</p>
-
-<p>Immerse yourself in a soothing sound bath that will transport you to a state of deep relaxation and inner peace. Let the gentle vibrations of crystal singing bowls, gongs, Handpan & other instruments wash away stress and tension. Allow your mind to unwind and your body to rejuvenate as the harmonious sounds envelop you.</p>
-
-<p>A powerful experience to nurture your mind, body, and soul. Doors open at 6:30 & Sound Bath starts promptly 7pm, no late arrivals admitted. Bring a water bottle, a yoga mat and whatever you need to be comfortable and drop into a relaxed state. Looking forward to serenading you!</p></div><a href="https://www.eventbrite.com/e/inner-peace-sound-bath-at-the-chapel-of-the-flowers-in-berkeley-tickets-1564530445679?aff=oddtdtcreator">Event Link</a></div>
-
-<div class="event_deets"><h3>Community Survival Program November</h3>
-<p>Sunday November 16 2025 11:00 AM until 1:30 PM</p>
-<button class="toggle-btn" onclick="toggleDescription(this)">Show Details</button>
-<div class="event_description"><p>Holistic Health Event: Providing access, services & education to whole plant medicine. The holistic health initiative is a continuation of the iconic health legacy of preventative healthcare programs created by the original Black Panther Party. </p>
-
-<p>This program promotes free, accessible, alternative healthcare, education & positive lifestyle services.</p>
-
-<p>- Free Food
-- Community Orgs
-- Pharmacist Consultation</p>
-
-<p>Presented by the Black Panther Party Alumni Legacy Network with CBCB dispensary and Redwood Roots Distribution.</p></div></div>
-
-<div class="event_deets"><h3>Dime Bag Cannabis Comedy</h3>
-<p>Friday February 13 2026 7:00 PM until Friday February 13 2026 10:00 PM</p>
-<button class="toggle-btn" onclick="toggleDescription(this)">Show Details</button>
-<div class="event_description"><p>Dime Bag Comedy night! </p>
-
-<p>Hosted by Ngaio Bealum</p>
-
-<p>Join us for a night of epic comedy at Berkeley's Chapel of Flowers, the coolest new spot in the East Bay. </p>
-
-<p>Host Ngaio Bealum (Netflix, Tubi, and more) has personally curated a hilarious lineup of the best comedians in the Country. The venue is 420 friendly and there will be snacks. See you there! </p>
-
-<p>Free parking, directly across from Ashby BART.</p></div><a href="https://eventhi.io/events/dime-bag-comedy-show-13584">Event Link</a></div>
-
-        </div>
-
-        <div class="host-event-container">
-            <a href="https://airtable.com/appT25NC13v3OxP1O/pagu7RYQBSrZjanry/form" target="_blank">
-                <button class="host-event-btn">Propose to Host an Event at the Chapel</button>
-            </a>
-        </div>
-    </div>
-    
-    <div class="footer">
-        <p><a href="index.html">Back to Chapel of the Flowers Homepage</a></p>
-        <p><a href="sms.html">Text updates</a> · <a href="terms.html">SMS Terms &amp; Conditions</a> · <a href="privacy.html">Privacy</a></p>
-    </div>
-</body>
-</html>
+- Pharmacist Consultation
+
+Presented by the Black Panther Party Alumni Legacy Network with CBCB dispensary and Redwood Roots Distribution.</div></details><div class="event-links"></div></article></div></details></section>
+<section class="host"><p class="eyebrow">Make yourself at home</p><h2>Bring your people together.</h2><p>Have something in mind? Tell us about your event.</p><a class="button" href="https://airtable.com/appT25NC13v3OxP1O/pagu7RYQBSrZjanry/form">Propose an event <span aria-hidden="true">↗</span></a></section>
+<p class="updated">Calendar last updated <time datetime="2026-10-30T08:58:27.934197-07:00">October 30, 2026 at 8:58 AM</time> (Berkeley time). Updates run approximately every 15 minutes; delays can occur.</p>
+</main>
+<footer><a href="index.html">Chapel of the Flowers</a><p>3049 Adeline Street · Berkeley, California<br>Across from Ashby BART</p><div><a href="sms.html">Text updates</a><a href="terms.html">SMS terms</a><a href="privacy.html">Privacy</a></div></footer>
+</body></html>
