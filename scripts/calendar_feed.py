@@ -1,13 +1,13 @@
 """Generate the public events page exclusively from the public Google ICS feed."""
-from datetime import datetime, date, time, timedelta
+from datetime import datetime, date, time, timedelta, timezone
 from zoneinfo import ZoneInfo
 from html import escape
 from html.parser import HTMLParser
 from pathlib import Path
-from urllib.parse import urlsplit, quote
+from urllib.parse import urlsplit, quote, urlencode
 from urllib.request import Request, urlopen
 import argparse, hashlib, json, re
-from icalendar import Calendar
+from icalendar import Calendar, Event
 import recurring_ical_events
 from remove_cancelled_events import EventBlocks
 
@@ -89,6 +89,44 @@ def fetch_verified(url, previous_count, now=None, reader=read_url):
         if signature(events)!=signature(again): raise ValueError('Unexpected calendar disappearance is not confirmed; previous page retained')
     return events
 
+def calendar_filename(e):
+    key=json.dumps([e['uid'],e['start'].isoformat()])
+    return hashlib.sha256(key.encode()).hexdigest()[:32]+'.ics'
+
+def event_description(e):
+    return '\n\n'.join([e['description']]+[u for u in e['links'] if u not in e['description']]).strip()
+
+def google_event_url(e):
+    def stamp(d):
+        return d.strftime('%Y%m%d') if e['allDay'] else d.astimezone(timezone.utc).strftime('%Y%m%dT%H%M%SZ')
+    # Keep template URLs usable even when historical descriptions are very long.
+    details=event_description(e)
+    if len(details)>1200: details=details[:1200]+'…\nFull event details: https://chapeloftheflowers.love/events.html'
+    return 'https://calendar.google.com/calendar/render?'+urlencode({'action':'TEMPLATE','text':e['title'],'dates':stamp(e['start'])+'/'+stamp(e['end']),'ctz':str(ZONE),'location':e['location'],'details':details})
+
+def event_ics(e,now=None):
+    calendar=Calendar();calendar.add('prodid','-//Chapel of the Flowers//Public Events//EN');calendar.add('version','2.0')
+    item=Event()
+    item.add('uid',calendar_filename(e)[:-4]+'@chapeloftheflowers.love')
+    item.add('dtstamp',now or datetime.now(timezone.utc))
+    for prop,key in [('dtstart','start'),('dtend','end')]:
+        item.add(prop,e[key].date() if e['allDay'] else e[key].astimezone(timezone.utc))
+    item.add('summary',e['title']);item.add('description',event_description(e));item.add('location',e['location']);item.add('class','PUBLIC')
+    if e['links']:item.add('url',e['links'][0])
+    # Export just the occurrence whose card was selected, never the full series.
+    calendar.add_component(item)
+    return calendar.to_ical()
+
+def write_calendar_files(events,directory,now=None):
+    files=[(calendar_filename(e),event_ics(e,now)) for e in events]
+    directory.mkdir(parents=True,exist_ok=True)
+    for name,data in files:
+        target=directory/name;temporary=target.with_suffix('.ics.tmp')
+        temporary.write_bytes(data);temporary.replace(target)
+    current={name for name,_ in files}
+    for old in directory.glob('*.ics'):
+        if re.fullmatch(r'[0-9a-f]{32}\.ics',old.name) and old.name not in current: old.unlink()
+
 def card(e):
     start,end=e['start'],e['end']
     day=start.strftime('%A, %B %-d, %Y')
@@ -98,7 +136,8 @@ def card(e):
         hours=f'{start:%-I:%M %p} – '+(f'{end:%B %-d, %Y}, ' if end.date()!=start.date() else '')+f'{end:%-I:%M %p}'
     description=f'<details class="event-details"><summary>Event details</summary><div class="description">{escape(e["description"])}</div></details>' if e['description'] else ''
     links=''.join(f'<a class="event-link" href="{escape(u,quote=True)}" rel="noopener noreferrer">{"Tickets &amp; information" if i==0 else "More information"} <span aria-hidden="true">↗</span></a>' for i,u in enumerate(e['links']))
-    return f'<article class="event-card"><p class="event-date"><time datetime="{start.isoformat()}">{escape(day)}</time></p><h3>{escape(e["title"])}</h3><p class="event-time">{escape(hours)}</p>{description}<div class="event-links">{links}</div></article>'
+    calendar_links=f'<details class="add-calendar"><summary>Add to calendar</summary><div><a href="{escape(google_event_url(e),quote=True)}" rel="noopener noreferrer">Google Calendar</a><a href="calendar/{calendar_filename(e)}" download="chapel-event.ics">Apple Calendar / Outlook (.ics)</a></div></details>'
+    return f'<article class="event-card"><p class="event-date"><time datetime="{start.isoformat()}">{escape(day)}</time></p><h3>{escape(e["title"])}</h3><p class="event-time">{escape(hours)}</p>{description}<div class="event-links">{links}</div>{calendar_links}</article>'
 
 def render_page(events,calendar_id,now=None):
     now=now or datetime.now(ZONE)
@@ -154,7 +193,8 @@ def main():
     url='https://calendar.google.com/calendar/ical/'+quote(cfg['calendarId'],safe='')+'/public/basic.ics'
     events=parse_feed(Path(args.feed_file).read_bytes(),now) if args.feed_file else fetch_verified(url,int(count[1]) if count else 0,now)
     page=render_page(events,cfg['calendarId'],now)
-    # Atomic replacement happens only after a complete fetch, parse and render.
+    write_calendar_files(events,target.parent/'calendar',now)
+    # Atomic replacement happens only after a complete fetch, parse, render and export.
     temporary=target.with_suffix('.html.tmp');temporary.write_text(page);temporary.replace(target)
     print(json.dumps({'events':len(events),'output':str(target)}))
 if __name__=='__main__':main()

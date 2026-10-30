@@ -39,4 +39,49 @@ class CalendarFeedTests(unittest.TestCase):
   shows=[e for e in m['events'] if 'Full Body Sensory' in e['summary']];self.assertEqual(len(shows),3)
   self.assertTrue(any('POSTPONED' in e['summary'] for e in m['events']))
   self.assertEqual(build_manifest(source.read_text()),m)
+
+class EventCalendarLinksTests(unittest.TestCase):
+ def test_timed_download_and_google_link_preserve_actual_instants_and_public_fields(self):
+  from calendar_feed import event_ics, google_event_url
+  from icalendar import Calendar
+  from urllib.parse import urlsplit,parse_qs
+  e=parse_feed(feed(event(extra='DESCRIPTION:Bring friends\\nhttps://example.com/tickets\r\nLOCATION:Chapel & Garden\r\n')),NOW)[0]
+  exported=Calendar.from_ical(event_ics(e,NOW)).walk('VEVENT')
+  self.assertEqual(len(exported),1)
+  self.assertEqual(exported[0].decoded('DTSTART'),e['start'])
+  self.assertEqual(exported[0].decoded('DTEND'),e['end'])
+  self.assertEqual(str(exported[0]['LOCATION']),'Chapel & Garden')
+  self.assertNotIn('ATTENDEE',exported[0])
+  q=parse_qs(urlsplit(google_event_url(e)).query)
+  self.assertEqual(q['dates'],['20261102T030000Z/20261102T050000Z'])
+  self.assertEqual(q['text'],['Public Concert'])
+ def test_all_day_download_keeps_exclusive_end_and_occurrences_are_individual(self):
+  from calendar_feed import event_ics, calendar_filename, google_event_url
+  from icalendar import Calendar
+  from datetime import date
+  data=event('series','RRULE:FREQ=WEEKLY;COUNT=2\r\n')
+  items=parse_feed(feed(data),NOW)
+  self.assertNotEqual(calendar_filename(items[0]),calendar_filename(items[1]))
+  self.assertNotIn('RRULE',Calendar.from_ical(event_ics(items[0],NOW)).walk('VEVENT')[0])
+  all_day='BEGIN:VEVENT\r\nUID:day\r\nDTSTART;VALUE=DATE:20261101\r\nDTEND;VALUE=DATE:20261103\r\nSUMMARY:Open house\r\nEND:VEVENT\r\n'
+  e=parse_feed(feed(all_day),NOW)[0]
+  v=Calendar.from_ical(event_ics(e,NOW)).walk('VEVENT')[0]
+  self.assertEqual(v.decoded('DTSTART'),date(2026,11,1))
+  self.assertEqual(v.decoded('DTEND'),date(2026,11,3))
+  self.assertIn('20261101%2F20261103',google_event_url(e))
+ def test_every_card_has_a_download_and_generated_file(self):
+  from calendar_feed import write_calendar_files, calendar_filename
+  from tempfile import TemporaryDirectory
+  events=parse_feed(feed(event()),NOW)
+  with TemporaryDirectory() as tmp:
+   write_calendar_files(events,Path(tmp),NOW)
+   self.assertTrue((Path(tmp)/calendar_filename(events[0])).is_file())
+   write_calendar_files([],Path(tmp),NOW)
+   self.assertFalse((Path(tmp)/calendar_filename(events[0])).exists())
+  page=render_page(events,'public@example.com',NOW)
+  self.assertIn('Add to calendar',page)
+  self.assertIn('Google Calendar',page)
+  self.assertIn('download=',page)
+  self.assertIn('calendar/'+calendar_filename(events[0]),page)
+
 if __name__=='__main__':unittest.main()

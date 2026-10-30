@@ -1,2 +1,4 @@
 # Preserve the byte-for-byte public-page migration fixture.
 test/fixtures/events-before-public-calendar.html -whitespace
+# iCalendar requires CRLF and significant folded-line whitespace.
+calendar/*.ics -text -whitespace

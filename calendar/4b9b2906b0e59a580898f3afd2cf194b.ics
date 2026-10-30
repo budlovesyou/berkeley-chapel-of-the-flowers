@@ -1,0 +1,21 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Chapel of the Flowers//Public Events//EN
+BEGIN:VEVENT
+SUMMARY:Community Survival Program October
+DTSTART:20251019T180000Z
+DTEND:20251019T203000Z
+DTSTAMP:20261030T163702Z
+UID:4b9b2906b0e59a580898f3afd2cf194b@chapeloftheflowers.love
+CLASS:PUBLIC
+DESCRIPTION:Holistic Health Event: Providing access\, services & education
+  to whole plant medicine. The holistic health initiative is a continuation
+  of the iconic health legacy of preventative healthcare programs created b
+ y the original Black Panther Party. \n\nThis program promotes free\, acces
+ sible\, alternative healthcare\, education & positive lifestyle services.
+ \n\n- Free Food\n- Community Orgs\n- Pharmacist Consultation\n\nPresented 
+ by the Black Panther Party Alumni Legacy Network with CBCB dispensary and 
+ Redwood Roots Distribution.
+LOCATION:Chapel of the Flowers\, 3049 Adeline Street\, Berkeley\, CA 94703
+END:VEVENT
+END:VCALENDAR

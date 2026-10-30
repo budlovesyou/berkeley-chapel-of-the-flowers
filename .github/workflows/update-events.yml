@@ -27,9 +27,9 @@ jobs:
         run: python scripts/calendar_feed.py
       - name: Publish verified changes
         run: |
-          if git diff --quiet -- events.html; then exit 0; fi
+          if git diff --quiet -- events.html calendar && test -z "$(git ls-files --others --exclude-standard calendar)"; then exit 0; fi
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git add events.html
+          git add events.html calendar
           git commit -m 'Refresh public calendar events'
           git push origin HEAD:main
