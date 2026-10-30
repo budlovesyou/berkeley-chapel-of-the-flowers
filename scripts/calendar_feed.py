@@ -127,6 +127,21 @@ def write_calendar_files(events,directory,now=None):
     for old in directory.glob('*.ics'):
         if re.fullmatch(r'[0-9a-f]{32}\.ics',old.name) and old.name not in current: old.unlink()
 
+def display_description(e):
+    # The card already exposes these destinations as named links below the text.
+    lines=e['description'].splitlines()
+    labels={'tickets:', 'tickets & information:', 'tickets and information:',
+            'tickets, registration, and current event information:',
+            'ticket link:', 'registration:', 'more information:'}
+    result=[]
+    for line in lines:
+        if line.strip() in e['links']:
+            while result and not result[-1].strip(): result.pop()
+            if result and result[-1].strip().casefold() in labels: result.pop()
+            continue
+        result.append(line)
+    return re.sub(r'\n[ \t]*\n(?:[ \t]*\n)+','\n\n','\n'.join(result)).strip()
+
 def card(e):
     start,end=e['start'],e['end']
     day=start.strftime('%A, %B %-d, %Y')
@@ -134,7 +149,8 @@ def card(e):
         last=(end-timedelta(days=1)).date(); hours='All day'+(f' · through {last:%B %d, %Y}' if last!=start.date() else '')
     else:
         hours=f'{start:%-I:%M %p} – '+(f'{end:%B %-d, %Y}, ' if end.date()!=start.date() else '')+f'{end:%-I:%M %p}'
-    description=f'<details class="event-details"><summary>Event details</summary><div class="description">{escape(e["description"])}</div></details>' if e['description'] else ''
+    description_text=display_description(e)
+    description=f'<details class="event-details"><summary>Event details</summary><div class="description">{escape(description_text)}</div></details>' if description_text else ''
     links=''.join(f'<a class="event-link" href="{escape(u,quote=True)}" rel="noopener noreferrer">{"Tickets &amp; information" if i==0 else "More information"} <span aria-hidden="true">↗</span></a>' for i,u in enumerate(e['links']))
     calendar_links=f'<details class="add-calendar"><summary>Add to calendar</summary><div><a href="{escape(google_event_url(e),quote=True)}" rel="noopener noreferrer">Google Calendar</a><a href="calendar/{calendar_filename(e)}" download="chapel-event.ics">Apple Calendar / Outlook (.ics)</a></div></details>'
     return f'<article class="event-card"><p class="event-date"><time datetime="{start.isoformat()}">{escape(day)}</time></p><h3>{escape(e["title"])}</h3><p class="event-time">{escape(hours)}</p>{description}<div class="event-links">{links}</div>{calendar_links}</article>'
