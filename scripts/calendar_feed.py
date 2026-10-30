@@ -145,7 +145,15 @@ def display_description(e):
         result.append(line)
     return re.sub(r'\n[ \t]*\n(?:[ \t]*\n)+','\n\n','\n'.join(result)).strip()
 
-def card(e):
+def event_image(image):
+    if not isinstance(image,dict): return ''
+    src=image.get('src','')
+    if not isinstance(src,str) or not re.fullmatch(r'assets/event-images/[a-z0-9-]+\.(?:webp|jpg|png)',src): return ''
+    width,height=image.get('width'),image.get('height')
+    if not all(type(n) is int and n>0 for n in (width,height)): return ''
+    return f'<a class="event-artwork" href="{src}" title="View full-size event artwork"><img src="{src}" alt="{escape(str(image.get("alt","Event artwork")),quote=True)}" width="{width}" height="{height}" loading="lazy" decoding="async"></a>'
+
+def card(e, image=None):
     start,end=e['start'],e['end']
     day=start.strftime('%A, %B %-d, %Y')
     if e['allDay']:
@@ -156,14 +164,15 @@ def card(e):
     description=f'<details class="event-details"><summary>Event details</summary><div class="description">{escape(description_text)}</div></details>' if description_text else ''
     links=''.join(f'<a class="event-link" href="{escape(u,quote=True)}" rel="noopener noreferrer">{"Tickets &amp; information" if i==0 else "More information"} <span aria-hidden="true">↗</span></a>' for i,u in enumerate(e['links']))
     calendar_links=f'<details class="add-calendar"><summary>Add to calendar</summary><div><a href="{escape(google_event_url(e),quote=True)}" rel="noopener noreferrer">Google Calendar</a><a href="calendar/{calendar_filename(e)}" download="chapel-event.ics">Apple Calendar / Outlook (.ics)</a></div></details>'
-    return f'<article class="event-card"><p class="event-date"><time datetime="{start.isoformat()}">{escape(day)}</time></p><h3>{escape(e["title"])}</h3><p class="event-time">{escape(hours)}</p>{description}<div class="event-links">{links}</div>{calendar_links}</article>'
+    return f'<article class="event-card">{event_image(image)}<p class="event-date"><time datetime="{start.isoformat()}">{escape(day)}</time></p><h3>{escape(e["title"])}</h3><p class="event-time">{escape(hours)}</p>{description}<div class="event-links">{links}</div>{calendar_links}</article>'
 
-def render_page(events,calendar_id,now=None):
+def render_page(events,calendar_id,now=None,images=None):
     now=now or datetime.now(ZONE)
+    images=images or {}
     upcoming=[e for e in events if e['end']>now]; past=sorted((e for e in events if e['end']<=now),key=lambda e:e['start'],reverse=True)
-    upcoming_html=''.join(card(e) for e in upcoming) or '<div class="empty"><h3>More gatherings to come</h3><p>New public events will appear here once they’re announced. Subscribe to the calendar to stay in the loop.</p></div>'
+    upcoming_html=''.join(card(e,images.get(e['uid'])) for e in upcoming) or '<div class="empty"><h3>More gatherings to come</h3><p>New public events will appear here once they’re announced. Subscribe to the calendar to stay in the loop.</p></div>'
     years=sorted({e['start'].year for e in past},reverse=True)
-    history=''.join(f'<details class="archive-year"><summary>{year} <span>{sum(e["start"].year==year for e in past)} {"event" if sum(e["start"].year==year for e in past)==1 else "events"}</span></summary><div class="event-grid">'+''.join(card(e) for e in past if e['start'].year==year)+'</div></details>' for year in years) or '<p>Past public events will appear here.</p>'
+    history=''.join(f'<details class="archive-year"><summary>{year} <span>{sum(e["start"].year==year for e in past)} {"event" if sum(e["start"].year==year for e in past)==1 else "events"}</span></summary><div class="event-grid">'+''.join(card(e,images.get(e['uid'])) for e in past if e['start'].year==year)+'</div></details>' for year in years) or '<p>Past public events will appear here.</p>'
     encoded=quote(calendar_id,safe=''); subscribe='https://calendar.google.com/calendar/u/0/r?cid='+encoded
     ics='https://calendar.google.com/calendar/ical/'+encoded+'/public/basic.ics'
     template=(ROOT/'events.template.html').read_text()
@@ -211,7 +220,11 @@ def main():
     old=target.read_text() if target.exists() else '';count=re.search(r'data-event-count="(\d+)"',old)
     url='https://calendar.google.com/calendar/ical/'+quote(cfg['calendarId'],safe='')+'/public/basic.ics'
     events=parse_feed(Path(args.feed_file).read_bytes(),now) if args.feed_file else fetch_verified(url,int(count[1]) if count else 0,now)
-    page=render_page(events,cfg['calendarId'],now)
+    image_file=ROOT/'event-images.json'
+    images=json.loads(image_file.read_text())['events'] if image_file.exists() else {}
+    # Artwork is optional: a missing asset must never hide a public event.
+    images={uid:img for uid,img in images.items() if event_image(img) and (ROOT/img['src']).is_file()}
+    page=render_page(events,cfg['calendarId'],now,images=images)
     write_calendar_files(events,target.parent/'calendar',now)
     # Atomic replacement happens only after a complete fetch, parse, render and export.
     temporary=target.with_suffix('.html.tmp');temporary.write_text(page);temporary.replace(target)

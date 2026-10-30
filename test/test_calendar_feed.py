@@ -84,4 +84,34 @@ class EventCalendarLinksTests(unittest.TestCase):
   self.assertIn('download=',page)
   self.assertIn('calendar/'+calendar_filename(events[0]),page)
 
+
+class EventImageTests(unittest.TestCase):
+ def test_verified_image_is_rendered_and_survives_calendar_refresh(self):
+  # A UID match survives title/link changes; unrelated events cannot inherit artwork.
+  from html.parser import HTMLParser
+  class Images(HTMLParser):
+   def __init__(self):super().__init__();self.images=[]
+   def handle_starttag(self,tag,attrs):
+    if tag=='img':self.images.append(dict(attrs))
+  events=parse_feed(feed(event('pictured')+event('unpictured')),NOW)
+  images={'pictured':{'src':'assets/event-images/concert.webp','alt':'Concert artwork & performers','width':960,'height':480}}
+  page=render_page(events,'public@example.com',NOW,images=images)
+  parser=Images();parser.feed(page)
+  self.assertEqual(len(parser.images),1)
+  self.assertEqual(parser.images[0]['src'],'assets/event-images/concert.webp')
+  self.assertEqual(parser.images[0]['alt'],'Concert artwork & performers')
+  self.assertEqual(parser.images[0]['loading'],'lazy')
+  self.assertEqual(parser.images[0]['width'],'960')
+  events[0]['title']='Updated concert title'
+  self.assertIn('assets/event-images/concert.webp',render_page(events,'public@example.com',NOW,images=images))
+  self.assertEqual(page.count('<article class="event-card">'),2)
+
+ def test_missing_or_unsafe_image_keeps_event_details_without_a_broken_image(self):
+  events=parse_feed(feed(event()),NOW)
+  for image in [None,{}, {'src':'javascript:alert(1)'}, {'src':'../secrets.png'}, {'src':'https://example.com/tracker.png'}]:
+   page=render_page(events,'public@example.com',NOW,images={'a':image})
+   self.assertNotIn('<img ',page)
+   self.assertIn('Public Concert',page)
+   self.assertIn('Add to calendar',page)
+
 if __name__=='__main__':unittest.main()

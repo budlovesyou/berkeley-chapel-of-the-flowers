@@ -2,3 +2,5 @@
 .add-calendar{margin-top:20px;font:14px/1.5 system-ui,sans-serif}.add-calendar>div{display:flex;flex-wrap:wrap;gap:12px 20px;padding:12px 0 0}.add-calendar a{padding:4px 0}
 
 @media(max-width:380px){.hero nav{align-items:flex-start;flex-direction:column;gap:14px}.hero-copy{padding-top:30px}}
+/* Preserve complete posters, including dates and lettering, at every screen size. */
+.event-artwork{display:flex;align-items:center;justify-content:center;background:#eeeee5;border:1px solid var(--line);border-radius:3px;margin:0 0 22px;overflow:hidden;aspect-ratio:16/10}.event-artwork img{display:block;width:100%;height:100%;object-fit:contain}.event-artwork:hover{border-color:var(--green)}
