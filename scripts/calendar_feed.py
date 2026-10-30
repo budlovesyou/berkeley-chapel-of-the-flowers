@@ -161,10 +161,10 @@ def card(e, image=None):
     else:
         hours=f'{start:%-I:%M %p} – '+(f'{end:%B %-d, %Y}, ' if end.date()!=start.date() else '')+f'{end:%-I:%M %p}'
     description_text=display_description(e)
-    description=f'<details class="event-details"><summary>Event details</summary><div class="description">{escape(description_text)}</div></details>' if description_text else ''
+    description=f'<div class="description">{escape(description_text)}</div>' if description_text else ''
     links=''.join(f'<a class="event-link" href="{escape(u,quote=True)}" rel="noopener noreferrer">{"Tickets &amp; information" if i==0 else "More information"} <span aria-hidden="true">↗</span></a>' for i,u in enumerate(e['links']))
     calendar_links=f'<details class="add-calendar"><summary>Add to calendar</summary><div><a href="{escape(google_event_url(e),quote=True)}" rel="noopener noreferrer">Google Calendar</a><a href="calendar/{calendar_filename(e)}" download="chapel-event.ics">Apple Calendar / Outlook (.ics)</a></div></details>'
-    return f'<article class="event-card">{event_image(image)}<p class="event-date"><time datetime="{start.isoformat()}">{escape(day)}</time></p><h3>{escape(e["title"])}</h3><p class="event-time">{escape(hours)}</p>{description}<div class="event-links">{links}</div>{calendar_links}</article>'
+    return f'<article class="event-card">{event_image(image)}<p class="event-date"><time datetime="{start.isoformat()}">{escape(day)}</time></p><h3>{escape(e["title"])}</h3><p class="event-time">{escape(hours)}</p><details class="event-details"><summary>Event details</summary>{description}<div class="event-links">{links}</div>{calendar_links}</details></article>'
 
 def render_page(events,calendar_id,now=None,images=None):
     now=now or datetime.now(ZONE)
